@@ -14,8 +14,10 @@
 \usepackage{xcolor}
 \usepackage{multicol}
 \usepackage{graphicx}
+\usepackage{caption}
+%\captionsetup[table]{position=bottom} 
 \floatstyle{plaintop}
-\restylefloat{table}
+%\restylefloat{table}
 \addbibresource{Bibliography.bib}
 % \setlength{\parskip}{\baselineskip}%
 \renewcommand{\tablename}{Tabla}
@@ -54,8 +56,11 @@
 \advisor{\\\vspace{0.25cm}Camilo Denis González Garrido\\\vspace{0.2cm}Daniel Mena Frias}
 \degree{Licenciado en Ciencia de la Computación}
 \faculty{Facultad de Matemática y Computación}
-\date{Fecha\\\vspace{0.25cm}\href{https://github.com/username/repo}{github.com/username/repo}}
+
+\date{20 de enero de 2023\\\vspace{0.25cm}\href{https://github.com/ic-matcom/fabric-sdk-csharp}{github.com/ic-matcom/fabric-sdk-csharp}}
+
 \logo{Graphics/uhlogo}
+
 \makenomenclature
 
 \renewcommand{\vec}[1]{\boldsymbol{#1}}
@@ -78,7 +83,15 @@
 \begin{document}
 
 \frontmatter
+
 \maketitle
+%\begin{center}
+	%\includegraphics[width=2.5cm]
+	%{Graphics/qr.png}
+	%\date{Fecha}
+	%\\\vspace{0.4cm}
+%	20 de enero de 2023
+%\end{center}
 
 \include{FrontMatter/Dedication}
 \include{FrontMatter/Thanks}
