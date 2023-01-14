@@ -1,1 +1,151 @@
-\chapter{Estado del Arte}\label{chapter:state-of-the-art}
+\chapter{Antecedentes}\label{chapter:state-of-the-art}
+
+En el presente cap\'itulo se ofrecen una serie de conceptos relevantes al tema en cuesti\'on. Su prop\'osito es el de facilitar la comprensi\'on de las bases en las que se enmarca esta investigaci\'on. %este proyecto
+
+La mayor\'ia de las definiciones que se proveen tienen como fuente \cite{hyperledgerPaper}, \cite{Hyperledgerdoc} y \cite{HyperledgerdocCA}. Para el resto se esclarecen las referencias apropiadas.%conceptos, se presentan, definiciones provienen de % adecuadas % debidamente referenciados %referencias correspondientes
+
+\section{Blockchain}
+
+%https://hyperledger-fabric.readthedocs.io/en/release-2.5/whatis.html
+Una blockchain o cadena de bloques no es m\'as que un libro mayor de transacciones inmutable y distribuido entre una red de nodos. Cada nodo mantiene una copia del \emph{ledger}, la cual se actualiza por medio de transacciones ejecutadas y validadas a partir de un protocolo de consenso. La informaci\'on (transacciones) se agrupa en bloques que incluyen un hash del bloque precedente, de forma que resulta casi imposible alterar los datos de una transacci\'on sin falsificar tambi\'en la de los bloques siguientes.
+
+AQUI SE PUEDEN PONER VENTAJAS DE LAS BLOCKCHAINS O LAS CARACTERISTICAS MAS GENERALES< O BIEN INFO DEL TIMELINE 
+
+PUEDE SER O BIEN EXPLICAR QUE ES EL CONSENSO< UN POQUITO MAS DE PQ ES INALTERABLE< ETC
+
+%https://www.geeksforgeeks.org/consensus-algorithms-in-blockchain/
+
+There is no central authority present to validate and verify the transactions, yet every transaction in the Blockchain is considered to be completely secured and verified. This is possible only because of the presence of the consensus protocol which is a core part of any Blockchain network. A consensus algorithm is a procedure through which all the peers of the Blockchain network reach a common agreement about the present state of the distributed ledger. In this way, consensus algorithms achieve reliability in the Blockchain network and establish trust between unknown peers in a distributed computing environment. Essentially, the consensus protocol makes sure that every new block that is added to the Blockchain is the one and only version of the truth that is agreed upon by all the nodes in the Blockchain. 
+
+immutability, privacy, security, and transparency
+%----------< HF Aitentication Authorization
+%Combining ID’s, Attributes, and Policies in Hyperledger Fabric Through the use of innovative concepts such as channels, policies, identities, and Membership Service Providers, Hyperledger Fabric can determine the identity of participants, perform access control based on these identities, and ensure the privacy of transactions and smart contracts.
+%----------> HF Aitentication Authorization
+
+%\section{Blockchain Timeline}
+
+\section{Understanding HLF}
+
+Hyperledger Fabric es un proyecto de c\'odigo libre del consorcio Hyperledger, creado su vez por la \emph{Linux Foundation} [\cite{linuxFoundation}] con el objetivo avanzar en el desarrollo de tecnolog\'ias blockchain. Consiste en una DLT dise\~nada espec\'ificamente para entornos empresariales, atendiendo a las necesidades de identificar a los participantes en la red, establecer una serie de permisos para la interacci\'on, de contar con privacidad y confidencialidad de trasacciones, baja latencia en la confirmaci\'on de estas y capacidad para enviar una cantidad elevada de datos por unidad de tiempo (\emph{throughput}).
+
+AHORA LISTAR CARACTERISTICAS< PQ LO Q SE MENCIONARON FUERON NECESIDADES
+aqui mencionar tambien la exsitencia de canales para manejar info probada
+Where Hyperledger Fabric breaks from some other blockchain systems is that it is private and permissioned. Rather than an open permissionless system that allows unknown identities to participate in the network (requiring protocols like “proof of work” to validate transactions and secure the network), the members of a Hyperledger Fabric network enroll through a trusted Membership Service Provider (MSP).
+
+HF es una plataforma permisionada, ideal para contextos empresariales donde se necesita identificar a los usuarios en la red y permititr que solo un numero de usuarios
+actualizados accedan a esta. 
+
+Posee una arquitectura altamente modular y configurable, capaz de ser adaptada a los diversos requerimientos que puedan surgir en la industria. Facilita customizar por ejemplo el protocolo de consenso a utilizar para determinar el orden de las transacciones. Con este fin provee implementaciones de mecanismos crash fault-tolerant (CFT) como Raft (el actual y recomendado), Kafka y Solo (para versiones de prueba), lo cual permite a los usuarios elegir el m\'as adecuado al nivel de confianza existente entre ellos.
+%Aqui pueden referenciarse varios articulos sobre los mecanismo de ordenaicon, solo que considero no son tan relevantes al tema tratado
+
+De igual forma cuenta con protocolos enchufables de gesti\'on de identidad como LDAP u OpenID Connect, con protocolos de gesti\'on de claves o bibliotecas criptogr\'aficas, entre otros.
+
+N\'otese adem\'as que, al utilizar mecanismos de consenso deterministas no requiere del uso de criptomonedas para incentivar el minado, lo cual resulta en una seguridad incrementada al no atraer atacantes que quieran socavar la estabilidad de la red. Adem\'as implica un costo operacional menos elevado de la plataforma .
+
+\subsection{Componentes principales}
+
+\subsubsection{Ledger}
+El ledger o libro mayor de cuentas de HF est\'a conformado por dos elementos: Un \emph{world state} o estado mundial y un \emph{transaction log} o lista de trasacciones. El primero resulta ser como la base de datos del ledger, describe el estado de este en un instante de tiempo dado. Por su parte, el segundo, mantiene un registro del historial de trasacciones que han resultado en el estado actual del world state.
+
+Cada participante mantiene una copia del ledger por cada red de HF a la que pertenece.
+
+\subsubsection{Assets}
+Ha de resaltarse que, mientras en blockchains como Bitcoin se mantiene un registro de las transferencias de criptomonedas, en Fabric la definici\'on de qu\'e es transferido resulta un poco m\'as flexible. En el \'ultimo caso se definen activos o \emph{assets} a transferir, lo que da cabida a un n\'umero de usos m\'as extendido.
+%aqui se puede argumentar
+
+Los activos pueden variar desde elementos tangibles como bienes ra\'ices y hardware, hasta intangibles como contratos y propiedades intelectuales. Hyperledger Fabric brinda la capacidad de modificar activos mediante transacciones de c\'odigo de cadena.
+
+Los activos representan precisamente la colecci\'on de pares clave-valor, cuyos cambios de estado se registran como transacciones en el libro mayor.
+
+\subsubsection{Chaincode}
+
+Los \emph{smart contracts} son llamados \emph{chiancode} o c\'odigo de cadena en Fabric. Estos constituyen la l\'ogica de negocio de una aplicaci\'on blockchain. 
+
+Los chaincodes definen activo(s) y transacciones para modificarlos. Pueden ser desplegados din\'amicamente y correr de forma concurrente en la red.
+
+Los elementos participantes de cada red permisionada en Fabric son capaces de utilizarlos para interactuar con el ledger y transformarlo.
+
+\subsubsection{Nodos}
+
+Los nodos constituyen las entidades de comunicaci\'on de una blockchain. En HF existen 3 tipos:
+
+\begin{enumerate}
+	\item Nodos Clientes: Los clientes que env\'ian invocaciones de trasacciones a los \emph{endorsers} y transmiten las proposiciones de trasacciones al servicio de ordenaci\'on.
+	
+	
+	\item Nodos Pares: O \emph{peers}, qui\'enes ejecutan trasacciones y mantienen el estado y una copia del ledger. Pueden asumir el rol de endosadores o endorsers.
+	
+	\item Nodos Ordenadores: El conjunto de estos nodos conforman lo que se le llama servicio de ordenamiento, el cual se encarga de ordernar las trasacciones endosadas y empaquetarlas en bloques. De igual forma se ocupan de darle un orden a dichos bloques siguiendo un protocolo de consenso como se comentaba anteriormente. Su segundo objetivo consiste en distribuir dichos bloques entre los peers para su posterior validaci\'on.
+	
+\end{enumerate}
+%Ordering-service-node or orderer: a node running the communication service that implements a delivery guarantee, such as atomic or total order broadcast.
+
+Aqu\'i es importante destacar c\'omo el hecho de separar el endosamiento de ejecuci\'on de chaincode (en los peers) del servicio de ordenamiento, al eliminar el embotellamiento, le provee a HF ventajas de desempe\~no y escalabilidad sobre los sistemas que ejecutan ambas fuciones en los mismos nodos.
+
+CAnales
+
+
+%Modularity Hyperledger Fabric has been specifically architected to have a modular architecture. Whether it is pluggable consensus, pluggable identity management protocols such as LDAP or OpenID Connect, key management protocols or cryptographic libraries, the platform has been designed at its core to be configured to meet the diversity of enterprise use case requirements. At a high level, Fabric is comprised of the following modular components: 
+%A pluggable ordering service establishes consensus on the order of transactions and then broadcasts blocks to peers.
+%------A pluggable membership service provider is responsible for associating entities in the network with cryptographic identities.
+%-----An optional peer-to-peer gossip service disseminates the blocks output by ordering service to other peers.
+%Smart contracts (“chaincode”) run within a container environment (e.g. Docker) for isolation. They can be written in standard programming languages but do not have direct access to the ledger state.
+%------The ledger can be configured to support a variety of DBMSs.
+%------A pluggable endorsement and validation policy enforcement that can be independently configured per application.
+ 
+\subsection{Flujo}
+
+La mayor\'ia de las blockchains utilizan un paradigma nombrado \emph{order-execute} que requiere, para alcanzar el consenso, que los smart contracts a utilizar sean deterministas. Lo anterior limita su programaci\'on a lenguajes de dominio espec\'ifico que eliminen las operaciones no deterministas. Adem\'as, require que todas las transacciones se ejecuten secuencialmente por todos los nodos, lo que implica que deban ser tomadas medias de protecci\'on extra ante posibles ataques maliciosos que deseen desequilibrar la red.
+
+En cambio, en Fabric se utiliza un arquitectura llamada \emph{order-execute-validate} que resuelve muchos de los problemas comentados.
+
+Dicho modelo consta de tres pasos:
+\begin{enumerate}
+	\item Primeramente se ejecuta una trasacci\'on, se chequea su correctitud y se respalda (proceso de \emph{endorsement}).
+	
+	\item Luego se ordenan las trasacciones a partir del protocolo de consenso.
+	
+	\item Se validan teniendo en cuenta la pol\'itica de endosamiento espec\'ifica a la aplicaci\'on manejada y, por \'ultimo, se aplican al ledger.
+\end{enumerate}
+
+Las pol\'iticas de endosamiento a las que se hace referencia dictan qu\'e nodos par y cu\'antos de ellos deben garantizar la ejecuci\'on correcta de un contrato inteligente determinado. De esta forma se asegura que s\'olo un subcojunto de los peers deba ejecutarlo. Esto facilita que el sistema sea m\'as escalable y tenga un mejor desempe\~no con la capacidad a\~nadida de ejecuciones en paralelo.
+
+Igualmente, ha de notarse c\'omo se elimimina el no determinismo, al poder filtrar los resultados inconsistentes antes de pasar a la fase de ordering.
+
+Dicho cambio de arquitectura contituye una de las caracter\'isticas que realzan la importancia de HF. Es este nuevo modelo que implementa, el que hace posible la programaci\'on de chaincode en lenguajes est\'andar como Python, Java y Javascript. V\'ease su grandeza de facilitar al programador el crear un v\'inculo con esta nueva DLT, ahorr\'andole horas de estudio para aprender un nuevo lenguaje de programaci\'on y de debugueo para encontrar errores nunca tratados por \'el.
+
+Precisamente en esta capacidad de Fabric es en la que se apoya este proyecto, puesto que es la que hace posible la programaci\'on de smart contracts en C\# tras implementar el engranaje apropiado.
+ 
+%The order-execute architecture can be found in virtually all existing blockchain systems, ranging from public/permissionless platforms such as Ethereum (with PoW-based consensus) to permissioned platforms such as Tendermint, Chain, and Quorum.
+
+%This design departs radically from the order-execute paradigm in that Fabric executes transactions before reaching final agreement on their order.
+
+%\subsubsection{Ejemplo}
+
+%La arquitectura de HF cuenta con un SDk que es el que permite la comunicacion entre las aplciaciones y la red blockchain. Cuando por ejemplo un cliente A desea comprar comida de uno B: (descrito en la diapo 7 de la conf Intro del tema 3)
+
+%-El cliente A (reconocido por el Fabric CA, el encargado de la autenticacion) realiza una peticion para comprar comida (mediante un canal que les permite crear un ledger separado y tener un mecanismo para comunicaciones privadas y datos privados). 
+%-El sdk la recibe y crea una propuesta de transacción a los nodos peers (que tienen el chaincode instalado). 
+%-Los pares-endosadores comprueban la propuesta de transacción y ejecutan la transacción, pero NO ACTUALIZAN el ledger, sino que envían de vuelta una propuesta de respuesta (firma + conjunto delta).
+%-El SDK del nodo-cliente valida las firmas de los nodos-pares que firmaron y compara las respuestas de las propuestas
+%-El nodo-cliente difunde la “propuesta de transacción” y la respuesta al “servicio de ordenamiento”.
+%-El “servicio de ordenamiento” recibe transacciones de todos los canales de la red.
+%-Ordena transacciones por canal, y crea bloques por canal. os bloques se envían a todos los nodos-pares del canal.
+%- Cada nodo-par valida que no existan cambios.
+%- Cada nodo-par etiqueta cada transacción del bloque como válidas o no válidas.
+%- Cada nodo-par agrega un bloque a la cadena del canal
+%- Para transacciones válidas, los conjuntos delta se agregan a la base de datos de estado.
+
+\section{Fabric SDKs} 
+
+Las aplicaciones que deseen interactuar con el ledger lo deben hacer por medio de un intermediario, un SDK o paquete de desarrollo de \emph{software}. Los espec\'ificos a HF est\'an dise\~nados para comunicarse con los smart contracts, encargados a su vez de realizar las operaciones de \emph{get, put, delete} sobre el world state y registrar las trasacciones en la blockchain.
+
+Hyperledger Fabric ofrece un n\'umero de SDKs para el desarrollo de aplicaciones en una amplia variedad de lenguajes de programaci\'on. Actualmente cuenta con soporte para Node.js [\cite{SDKNode}] y Java [\cite{SDKJava}], los primeros en aparecer. Igualmente, a pesar de a\'un no haber sido publicados de forma oficial, expone para su descarga y prueba implementaciones para Go [\cite{SDKGO}] y Python [\cite{SDKPython}].
+
+Vale aclarar que estos paquetes son considerados SDKs de bajo nivel. Contienen una considerable cantidad de c\'odigo y, por tanto, una complejidad bastante elevada. Queda en manos programador con la intenci\'on de conectar una aplicaci\'on con Fabric, comprender el funcionamiento de las solicitudes de transacciones y el endosamiento para implementarlos a partir de estas plataformas, dado que en realidad lo que contienen no es m\'as que una adaptaci\'on de las llamadas gRPC [\cite{grpc}] para cada lenguaje espec\'ifico.
+
+Para resolver estos problemas se han creado APIs de alto nivel que le permiten a los desarrolladores abstraerse un poco m\'as del funcionamiento de HF en sus or\'igenes. As\'i, con proyectos como \cite{FabricGatewayJava} y \cite{FabricGatewayGeneral} se facilita la realizaci\'on de consultas, ejecuci\'on de transacciones y respuesta a eventos que permitan conocer y modificar el estado del ledger.
+
+El surgimiento de estos modelos m\'as consistentes, supresores de mucho c\'odigo repetitivo propenso a errores, ha sido bien recibido por la comunidad. No obstante, su funcionamiento cuenta en las bases con los SDKs mencionados al inicio, siendo de hecho construidos encima de estos. Adem\'as carecen de un mecanismo para gestionar tareas de administraci\'on. Por ello, a\'un se hace necesario intercambiar directamente con los SDKs de bajo nivel para la creaci\'on de identidades, su registro entre otras operaciones de relevancia.
+
+Dado que el objetivo del presente trabajo gira en torno a estas funcionales, son entonces los SDKs originales de Java, Node, Go y Python los que fungen como gu\'ia para el desarrollo.
