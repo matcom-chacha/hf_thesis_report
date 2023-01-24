@@ -1,0 +1,6 @@
+-Web of Science Core Collection WOC
+-Annadir una nota aclarando que DLT y blockchain no son lo mismo
+-SDKs
+-grpc
+-X.509 certificates
+-LDAP

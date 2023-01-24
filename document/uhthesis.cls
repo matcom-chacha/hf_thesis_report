@@ -22,11 +22,11 @@
 \RequirePackage{footmisc}
 \RequirePackage{csquotes}
 \RequirePackage[
-	style=apa,
-	citestyle=authoryear,
+	style=ieee,
+	citestyle=numeric,
   hyperref=true,
 	backref=true,
-  backend=biber
+backend=biber
 	]{biblatex}
 \RequirePackage[linktocpage,breaklinks,colorlinks,%
                 linkcolor=black,anchorcolor=black,citecolor=black,%
