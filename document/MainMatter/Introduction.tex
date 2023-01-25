@@ -25,7 +25,7 @@ As\'i, las blockchains como registros digitales distribuidos, p\'ublicos e inmut
 
 N\'otese que la mayor\'ia de las blockchains conocidas son p\'ublicas o \emph{permissionless}, lo que significa que cualquiera puede interactuar en ellas. Sin embargo, en entornos del tipo empresarial se requiere en muchas ocasiones controlar qui\'enes tienen acceso a la red. Por ejemplo, regulaciones del tipo \emph{Know-Your-Customer (KYC)} y \emph{Anti-Money Laundering (AML)} en el ambiente finaciero exigen conocer qui\'en realiza cada transacci\'on. 
 
-A ra\'iz de estos y otros requerimientos funcionales, se han modificado numerosas redes existentes de anta\~no y se han creado otras espec\'ificas al sector empresarial. En este \'utltimo grupo se enmarca \emph{Hyperledger Fabric (HLF)} [\cite{androulaki2018hyperledger}], como una tecnolog\'ia de redes distribu\'idas (del ingl\'es \emph{Distributed Ledger Technology DLT}) dise\~nada para encajar en este panorama.%****Aqui es valido hacer la aclaracion de que DLT no es precisamente blockchain, sino q es mas amplio
+A ra\'iz de estos y otros requerimientos funcionales, se han modificado numerosas redes existentes de anta\~no y se han creado otras espec\'ificas al sector empresarial. En este \'utltimo grupo se enmarca \emph{Hyperledger Fabric (HLF)} [\cite{androulaki2018hyperledger}], como una tecnolog\'ia de redes distribuidas (del ingl\'es \emph{Distributed Ledger Technology DLT}) dise\~nada para encajar en este panorama.%****Aqui es valido hacer la aclaracion de que DLT no es precisamente blockchain, sino q es mas amplio
 %destacar sobresalir dominar
 
 La naturaleza permisionada de HLF permite que los participantes de la red se conozcan entre s\'i, lo cual le aporta un gran nivel de seguridad. 
@@ -33,7 +33,7 @@ La naturaleza permisionada de HLF permite que los participantes de la red se con
 %puedan ser competidores es posibl elegir un mecanismo de consenso acorde a sus necesidades y caracter\'isticas reales.
 Posee adem\'as una arquitectura modular y altamente configurable; y constituye una de las mejores plataformas disponibles en t\'erminos de procesamiento de transacciones y latencia de confirmaci\'on de las mismas. %plugging consensus protocol, no necesita de una criptomoneda nativa para incentivar el el minado, lo q a su vez reduce el riesgo de ataques
 
-Una de sus peculiaridades m\'as relevantes, radica en el hecho de ser la primera DLT en brindar soporte para programar contratos inteligentes en lenguajes de prop\'osito general, en lugar de limitar el desarrollo a lenguajes espec\'ificos al dominio (DSL del ingl\'es Domain Specific Language) como lo es Solidity para Ethereum. Su flujo de ejecuci\'on del tipo \emph{execute-order-validate}, en contraste con el tradicional \emph{order-execute}, elimina el no determinismo, puesto que posibilita el filtrado de resultados incorrectos antes de pasar a la fase de ordenamiento. 
+Una de sus peculiaridades m\'as relevantes, radica en el hecho de ser la primera DLT en brindar soporte para programar contratos inteligentes en lenguajes de prop\'osito general, en lugar de limitar el desarrollo a lenguajes espec\'ificos al dominio (DSL del ingl\'es Domain Specific Language) como lo es Solidity para Ethereum. %Su flujo de ejecuci\'on del tipo \emph{execute-order-validate}, en contraste con el tradicional \emph{order-execute}, elimina el no determinismo, puesto que posibilita el filtrado de resultados incorrectos antes de pasar a la fase de ordenamiento. 
 
 %De esta forma, en la actualidad %mas utilizado, sinonimo que ya esta palabra se repite arriba
 %que hacen a HF \'unico 
@@ -52,7 +52,7 @@ Este trabajo en particular pretende proseguir con el desarrollo de mecanismos qu
 Para dar continuidad a dicha investigaci\'on, resulta de inter\'es interactuar con el servidor de la autoridad certificadora de Fabric (Fabric-CA), a trav\'es de su REST-API, y as\'i administrar el ciclo de vida de los certificados de usuario. Dichos certificados son la base de la identificaci\'on de individuos mencionada con anterioridad. 
 
 Las plataformas desarrolladas para el intercambio entre cada lenguaje particular y la blockchain de HLF, los Fabric-SDK, cuentan con un componente \emph{fabric-ca-client} que facilita a las aplicaciones registrar nodos y usuarios, y establecer identidades confiables en la red. Luego, teniendo en cuenta la hipótesis de que “es viable la concepci\'on de un mecanismo similar a los existentes para extender las capacidades de interacci\'on con la red de Hyperledger Fabric al lenguaje de programaci\'on C\#”, es posible entonces exponer como objetivos
-generales de esta tesis: “el dise\~nar e implementar un m\'odulo fabric-ca-client para interactuar con el Fabric-CA empleando C Sharp”.
+generales de esta tesis: “el dise\~nar e implementar un m\'odulo \texttt{fabric-ca-client} para interactuar con el Fabric-CA empleando C Sharp”.
 Con el fin de dar cumplimiento a estos objetivos generales se pueden listar los siguientes objetivos específicos:
 
 %También brinda soporte para envíos de transacciones seudónimas.
@@ -60,18 +60,20 @@ Con el fin de dar cumplimiento a estos objetivos generales se pueden listar los 
 %como cada vez se hace mas necesario la creacion de aplicaciones que permitan interactuar con el mundo de la blochain y el de afuera. 
 
 \begin{enumerate}
-	\item Realizar un estudio de las bibliotecas fabric-sdk ya existentes para Python, Golang, Node.js y Java. Particularmente analizar el m\'odulo fabric-ca-client encargado de cumplir el prop\'osito de este proyecto. 
+	\item Realizar un estudio de las bibliotecas \texttt{fabric-sdk} ya existentes para Python, Golang, Node.js y Java. Particularmente analizar el m\'odulo \texttt{fabric-ca-client} encargado de cumplir el prop\'osito de este proyecto. 
 	
 	\item Evaluar qu\'e estructuras y patrones de los ya existentes se pueden llevar a C\#, cu\'ales se pueden reutilizar y qu\'e otros no han sido considerados a\'un.
 	
-	\item Concebir, dise\~nar, implementar el m\'odulo fabric-ca-client del fabric-sdk-csharp, para generar identidades criptogr\'aficas con CSharp. Como centro de la creaci\'on brindar soporte para las peticiones de registro, inscripci\'on, renovaci\'on y revocaci\'on de certificados.
+	\item Concebir, dise\~nar, implementar el m\'odulo \texttt{fabric-ca-client} del
+	\\
+	\texttt{fabric-sdk-csharp}, para generar identidades criptogr\'aficas con C\#. Garantizar un soporte para las peticiones b\'asicas de registro, inscripci\'on, renovaci\'on y revocaci\'on de certificados.
 	
 	%aqui se pueden separar los objetivos en fab-ca-client y fab-ca-server mas c509Cert, pero puede ser excesivo
 	
 	\item Desarrollar un conjunto de pruebas sobre el m\'odulo implementado, de modo que sea posible comparar objetivamente los resultados con los que reportan otros lenguajes y valorar el cumplimiento de los requerimientos b\'asicos.
 \end{enumerate}
 
-El documento en cuesti\'on se estructura de la siguiente forma: El cap\'itulo \ref{chapter:state-of-the-art} realiza un bosquejo de las tecnolog\'ias relevantes para la comprensi\'on del presente estudio. El \ref{chapter:proposal} presenta la propuesta concreta a desarrollar, describe los m\'odulos y sus funcionalidades b\'asicas. El cap\'itulo \ref{chapter:implementation} comenta los resultados obtenidos y las pruebas realizadas. Finalmente, se exponen los \'ultimos an\'alisis y potenciales directivas para encaminar investigaciones futuras.
+El documento en cuesti\'on se estructura de la siguiente forma: En el cap\'itulo \ref{chapter:state-of-the-art} se realiza un bosquejo de las tecnolog\'ias relevantes para la comprensi\'on del presente estudio. El \ref{chapter:proposal} presenta la propuesta concreta a desarrollar, describe los m\'odulos y sus funcionalidades b\'asicas. El cap\'itulo \ref{chapter:implementation} comenta los resultados obtenidos y las pruebas realizadas. Finalmente, se exponen los \'ultimos an\'alisis y potenciales directivas para encaminar investigaciones futuras.
 
 %Las aplicaciones interactuan con el ledger a traves de un intermediario que seria un sdk, el que a su vez se comunica con el smart contract que es el que realiza las operaciones 'get, put, delete' sobre el world state y registra las transacciones en la blokchain.
 

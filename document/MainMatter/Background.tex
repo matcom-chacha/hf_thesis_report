@@ -88,7 +88,7 @@ Aqu\'i es importante destacar c\'omo el hecho de separar el endosamiento de ejec
 
 La mayor\'ia de las blockchains utilizan un paradigma nombrado \emph{order-execute} que requiere, para alcanzar el consenso, que los smart contracts a utilizar sean deterministas. Lo anterior limita su programaci\'on a lenguajes de dominio espec\'ifico que eliminen las operaciones no deterministas. Adem\'as, require que todas las transacciones se ejecuten secuencialmente por todos los nodos, lo que implica que deban ser tomadas medias de protecci\'on extra ante posibles ataques maliciosos que deseen desequilibrar la red.
 
-En cambio, en Fabric se utiliza un arquitectura llamada \emph{order-execute-validate} que resuelve muchos de los problemas comentados.
+En cambio, en Fabric se utiliza un arquitectura llamada \emph{execute-order-validate} que resuelve muchos de los problemas comentados.
 
 Dicho modelo consta de tres pasos:
 \begin{enumerate}
@@ -249,19 +249,21 @@ El de Go resulta un poco diferente al resto en cuanto a estilo e implementaci\'o
 Tomemos como ejemplo el de Node.js para un an\'alisis a mayor profundidad. Este est\'a dise\~nado siguiendo el estilo de la programaci\'on orientada a objetos. Se compone de 3 m\'odulos:
 
 \begin{enumerate}
-	\item fabric-network: El cual provee APIs de alto nivel para que las aplicaciones clientes interact\'uen con el chaincode, siendo el recomendado para la contrucci\'on de aplicaciones.
+	\item \texttt{fabric-network}: El cual provee APIs de alto nivel para que las aplicaciones clientes interact\'uen con el chaincode, siendo el recomendado para la contrucci\'on de aplicaciones.
 	
-	\item fabric-ca-client: Que permite la comunicaci\'on con la autoridad certificadora de Fabric.
+	\item \texttt{fabric-ca-client}: Que permite la comunicaci\'on con la autoridad certificadora de Fabric.
 	
-	\item fabric-common: Una API de bajo nivel utilizada para implementar la capacidad de red de fabric-network. Facilita la interacci\'on con los componentes claves de una red de HLF, d\'igase nodos pares, ordenadores y flujos de eventos.
+	\item \texttt{fabric-common}: Una API de bajo nivel utilizada para implementar la capacidad de red de fabric-network. Facilita la interacci\'on con los componentes claves de una red de HLF, d\'igase nodos pares, ordenadores y flujos de eventos.
 \end{enumerate}
 
 %[esto puede ponerse aqui o pasarlo a la parte de propuesta]
 %Escribir aqui un poquito de las notas que hay en la libreta sobre que hace cada repo
 
-El m\'odulo fabric-ca-client, el de mayor inter\'es para este proyecto, es el que provee las capadidades para interactuar con la Fabric CA para el manejo de entidades.  Permite registrar usuarios, inscribirlos para obtener el certificado correspondiente firmado por la Ca,  revocar certificados, revocar usuarios seg\'un su \emph{enrollmentId} o n\'umero identificador de inscripci\'on, entre otros.
+El m\'odulo \texttt{fabric-ca-client}, el de mayor inter\'es para este proyecto, es el que provee las capadidades para interactuar con la Fabric CA para el manejo de entidades.  Permite registrar usuarios, inscribirlos para obtener el certificado correspondiente firmado por la Ca,  revocar certificados, revocar usuarios seg\'un su \emph{enrollmentId} o n\'umero identificador de inscripci\'on, entre otros.
 
-Para poder acceder a estas funcionalidades la biblioteca cuenta con la clase FabricCAServices que debe ser instanciada como punto de entrada. Esta, poseedora a su vez de una clase FabricCAClient, expone los m\'etodos para gesti\'on de certificados y entidades plasmados en la segunda. Posee adem\'as una implementaci\'on de la interfaz \emph{CryptoSuite}, requerida por cada SDK, que encapsula los algoritmos para firmas digitales, encriptaci\'on y hashing seguro. En este caso el repo de node ofrece implementaciones para ECDSA y SHA2/3, aunque admite que se utilicen otras alternativas si son especificadas en las configuraciones de la CrytoSuite.
+Para poder acceder a estas funcionalidades la biblioteca cuenta con la clase 
+\\
+\texttt{ FabricCAServices} que debe ser instanciada como punto de entrada. Esta, poseedora a su vez de una clase \texttt{FabricCAClient}, expone los m\'etodos para gesti\'on de certificados y entidades plasmados en la segunda. Posee adem\'as una implementaci\'on de la interfaz \texttt{CryptoSuite}, requerida por cada SDK, que encapsula los algoritmos para firmas digitales, encriptaci\'on y hashing seguro. En este caso el repo de node ofrece implementaciones para ECDSA y SHA2/3, aunque admite que se utilicen otras alternativas si son especificadas en las configuraciones de la CrytoSuite.
 
 %Comentar que JAVA es igual orientado a objetos lo que no cuenta con la clase FCAServices
 
