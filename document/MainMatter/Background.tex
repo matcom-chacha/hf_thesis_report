@@ -6,24 +6,31 @@ La mayor\'ia de las definiciones que se proveen tienen como fuente al \emph{pape
 
 \section{\textquestiondown Qu\'e se entiende por Blockchain?}
 
-Una blockchain o cadena de bloques no es m\'as que un libro mayor de transacciones inmutable y distribuido entre una red de nodos. Cada nodo mantiene una copia del \emph{ledger}, la cual se actualiza por medio de transacciones ejecutadas y validadas a partir de un protocolo de consenso. La informaci\'on (transacciones) se agrupa en bloques que incluyen un hash del bloque precedente, de forma que resulta casi imposible alterar los datos de una transacci\'on sin falsificar tambi\'en la de los elementos siguientes.
+Una blockchain o cadena de bloques no es m\'as que un registro\footnote{com\'unmente conocido como \emph{ledger} o libro mayor de contabilidad} inmutable y distribuido entre una red de nodos. Cada nodo mantiene una copia del ledger, la cual se actualiza por medio de transacciones ejecutadas y validadas a partir de un protocolo de consenso. La informaci\'on (transacciones) se agrupa en bloques que incluyen un hash del bloque precedente, de forma que resulta altamente complejo alterar los datos de una transacci\'on sin alterar tambi\'en la de los elementos siguientes.
+
+%libro mayor de transacciones falsificar
 
 Entre las ventajas de esta tecnolog\'ia es posible destacar:
 
 \begin{enumerate}
-	\item  No censura: Una de las caracter\'isticas m\'as relevantes de las plataformas blockchains es que en ellas no existe una autoridad centralizada con total control sobre la red. Esto es posible gracias a los mecanismos de consenso como \emph{Proof or Work} que aseguran se llegue a un acuerdo respecto al estado del ledger entre todos los nodos.
+	\item  No censura: Una de las caracter\'isticas m\'as relevantes de las plataformas blockchains es que en ellas no suele existir una autoridad centralizada con total control sobre la red. Esto es posible gracias a los mecanismos de consenso como \emph{Proof or Work} o \emph{Proof of Stake}, que aseguran se llegue a un acuerdo respecto al estado del ledger entre todos los nodos.
 	
-	De esta forma, se garantiza una especie de confianza entre elementos desconocidos de la red y se establece un protocolo que impide que una \'unica parte, ni gubernamental ni de ning\'un otro origen, sea capaz de censurar al resto.
+	De esta forma, se garantiza una especie de confianza entre elementos desconocidos de la red y se establece un protocolo que impide que una \'unica parte sea capaz de censurar al resto.
+	
+	%Es v\'alido aclarar que en una plataforma altamente configurable como lo es HLF s\'i puede darse el caso en el que el poder de decisi\'on se concentre en unos pocos elementos de la red.
 	
 	%que e nodo q se annade sea la unica version de la readlidad a partir de lo acordado por todos los nodos en la blockchain
 		
-	\item Seguridad: A diferencia de lo que es costumbre en las bases de datos tradicionales con las operaciones CRUD (funciones para crear, leer, actualizar y borrar), la informaci\'on que se guarda en una blockchain es persistente e inmutable. Gracias al mecanismo de enlazar bloques a partir de su hash se hace muy complejo que un atacante manipule los datos, puesto que se ver\'ian alterados tambi\'en todos los bloques consecutivos. Dado que la informaci\'on no se respalda en un \'unico destino, sino que se distribuye por todos los nodos de la red, las acciones fraudulentas de este tipo se encuentran un escenario a\'un m\'as complejo de penetrar.
+	\item Seguridad: A diferencia de lo que es costumbre en las bases de datos tradicionales, la informaci\'on que se almacena en una blockchain es persistente e inmutable. Gracias al mecanismo de enlazar bloques a partir de su hash se hace muy complejo que un atacante manipule los datos, pues, como se mencionaba anteriormente, resaltar\'ia la falla en los bloques consecutivos. Adicionalmente, dado que la informaci\'on no se respalda en un \'unico destino, sino que se distribuye por todos los nodos de la red, las acciones fraudulentas de este tipo se encuentran un escenario a\'un m\'as complejo de penetrar.
+	
+	%con las operaciones CRUD (funciones para crear, leer, actualizar y borrar)
 	
 	% se previene accesos no autorizaofs a aprtir de la anonimizacion de datos personales y la aplicacion de redes permisionadas
 	\item Transparencia: El hecho de que las blockchains sean descentralizadas implica que cualquier miembro pueda visualizar en todo momento los datos que en ellas se guardan. Esto permite comprobar su correctitud, disminuyendo las posibilidades de fraudes que suelen acaecer en otros escenarios.
 	
-	\item Trazabilidad: Este punto est\'a muy relacionado al anterior. Precisamente por la transparencia de la red es que cada usuario es capaz de verificar el historial de todas las transacciones ejecutadas sobre esta. As\'i, es posible conocer cada estado por el que ha transitado un activo y realizar auditor\'ias para comprobar que todo marche acorde a lo deseado.	
+	\item Trazabilidad: Este punto est\'a muy relacionado al anterior. Precisamente por la transparencia de la red es que cada usuario es capaz de verificar el historial de todas las transacciones ejecutadas sobre esta. N\'otese que, debido a que estas redes son seguras e immutables, se garantiza la existencia de un registro con los cambios efectuados sobre ellas. As\'i, es posible conocer cada estado por el que ha transitado un activo y realizar auditor\'ias para comprobar que todo marche acorde a lo deseado.	
 
+%aqui alcaraciond e Kmilo sobre como las blockchains son immutables, y como para hacer alguna modificacion, al ser registros de just add, se registra el cambio con una referencia al activo a modificar
 \end{enumerate}
 
 %desventajas
@@ -32,26 +39,26 @@ Entre las ventajas de esta tecnolog\'ia es posible destacar:
 
 \section{Nociones B\'asicas de Hyperledger Fabric}
 
-Hyperledger Fabric (HLF) es un proyecto de c\'odigo libre del consorcio Hyperledger, creado su vez por la \emph{Linux Foundation} [\cite{linuxfoundation}] con el objetivo avanzar en el desarrollo de tecnolog\'ias blockchain. Consiste en una DLT dise\~nada espec\'ificamente para entornos empresariales, atendiendo a las necesidades de identificar a los participantes en la red, establecer una serie de permisos para la interacci\'on, de contar con privacidad y confidencialidad de trasacciones, baja latencia en la confirmaci\'on de estas y capacidad para enviar una cantidad elevada de datos por unidad de tiempo (\emph{throughput}).
+Hyperledger Fabric (HLF) es un proyecto de c\'odigo libre del consorcio Hyperledger, creado su vez por la \emph{Linux Foundation} [\cite{linuxfoundation}] con el objetivo de impulsar el desarrollo de tecnolog\'ias blockchain. Consiste en una DLT dise\~nada espec\'ificamente para entornos empresariales, atendiendo a las necesidades de identificar a los participantes en la red, establecer una serie de permisos para la interacci\'on, contar con privacidad y confidencialidad de transacciones, baja latencia en la confirmaci\'on de estas y capacidad para enviar una cantidad elevada de datos por unidad de tiempo (\emph{throughput}).
 
 HLF surge entonces como plataforma privada y permisionada. A diferencia de los sistemas abiertos en los que cualquier desconocido puede consultar y modificar los datos, Fabric utiliza un Proveedor de Servicios de Membres\'ia (MSP) para poder identificar a cada usuario que se una a la red. As\'i, limita la interacci\'on para s\'olo un n\'umero de elementos autorizados y establece facilidades para otorgar permisos espec\'ificos a cada uno. Ofrece adem\'as una caracter\'istica muy novedosa y \'util, d\'igase la utilizaci\'on de canales como especie de subredes para compartir informaci\'on confidencial entre pares o grupos de miembros que lo requieran.
 
-Fabric posee una arquitectura altamente modular y configurable, capaz de ser adaptada a los diversos requerimientos que puedan surgir en la industria. Facilita customizar por ejemplo el protocolo de consenso a utilizar para determinar el orden de las transacciones. Con este fin provee implementaciones de mecanismos crash fault-tolerant (CFT) como Raft (el actual y recomendado), Kafka y Solo (para versiones de prueba), lo cual permite a los usuarios elegir el m\'as adecuado al nivel de confianza existente entre ellos.
+Fabric posee una arquitectura altamente modular y configurable, capaz de ser adaptada a los diversos requerimientos que puedan surgir en la industria. Por ejemplo, facilita customizar el protocolo de consenso a utilizar para determinar el orden de las transacciones. Con este fin provee implementaciones de mecanismos crash fault-tolerant (CFT) como Raft\footnote{mecanismo CFT actual y recomendado por HLF}, Kafka y Solo\footnote{CFT para versiones de prueba}, lo cual permite a los usuarios elegir el m\'as adecuado al nivel de confianza existente entre ellos.
 %Aqui pueden referenciarse varios articulos sobre los mecanismo de ordenaicon, solo que considero no son tan relevantes al tema tratado
 
 De igual forma cuenta con protocolos enchufables de gesti\'on de identidad como LDAP u OpenID Connect, con protocolos de gesti\'on de claves o bibliotecas criptogr\'aficas, entre otros.
 
-N\'otese adem\'as que, al utilizar mecanismos de consenso deterministas no requiere del uso de criptomonedas para incentivar el minado. Lo anterior resulta en una seguridad incrementada al no atraer atacantes que quieran socavar la estabilidad de la red. Adem\'as implica un costo operacional menos elevado de la plataforma .
+Adem\'as, al utilizar mecanismos de consenso deterministas no requiere del uso de criptomonedas\footnote{aunque podr\'ian ser implementadas en el caso deseado} para incentivar el minado. Lo anterior podr\'ia considerarse como una medida de seguridad adicional, pues evita atraer atacantes que quieran socavar la estabilidad de la red. Adem\'as implica un costo operacional menos elevado de la plataforma.
 
 \subsection{Componentes principales}
 
 \subsubsection{Ledger}
-El ledger o libro mayor de cuentas de Fabric est\'a conformado por dos elementos: Un \emph{world state} o estado mundial y un \emph{transaction log} o lista de trasacciones. El primero resulta ser como la base de datos del ledger, describe el estado de este en un instante de tiempo dado. Por su parte, el segundo, mantiene un registro del historial de trasacciones que han resultado en el estado actual del world state.
+El ledger o libro mayor de cuentas de Fabric est\'a conformado por dos elementos: Un \emph{world state} o estado mundial y un \emph{transaction log} o lista de transacciones. El primero resulta ser una suerte de base de datos del ledger, pues describe el estado de este en un instante de tiempo dado. Por su parte, el segundo, mantiene un registro del historial de transacciones que han resultado en el estado actual del world state.
 
 Cada participante conserva una copia del ledger por cada red de HLF  a la que pertenece.
 
 \subsubsection{Assets}
-Ha de resaltarse que, mientras en blockchains como Bitcoin se mantiene un registro de las transferencias de criptomonedas, en Fabric la definici\'on de \textquestiondown qu\'e es transferido? resulta un poco m\'as flexible. En el \'ultimo caso se definen activos o \emph{assets} a transferir, lo que da cabida a un n\'umero de usos m\'as extendido.
+Mientras en blockchains como Bitcoin se mantiene un registro de las transferencias de criptomonedas, en Fabric la definici\'on de \textquestiondown qu\'e es transferido? resulta un poco m\'as flexible. En el \'ultimo caso se definen activos o \emph{assets} a transferir, lo que da cabida a un n\'umero de usos m\'as extendido.
 %aqui se puede argumentar
 
 Los activos pueden variar desde elementos tangibles como bienes ra\'ices y hardware, hasta intangibles como contratos y propiedades intelectuales. Hyperledger Fabric brinda la capacidad de modificar activos mediante transacciones de c\'odigo de cadena.
@@ -71,52 +78,57 @@ Los elementos participantes de cada red permisionada en HLF son capaces de utili
 Los nodos constituyen las entidades de comunicaci\'on de una blockchain. En HLF existen 3 tipos:
 
 \begin{enumerate}
-	\item Nodos Clientes: Los clientes que env\'ian invocaciones de trasacciones a los \emph{endorsers} y transmiten las proposiciones de trasacciones al servicio de ordenaci\'on.
+	\item Nodos Clientes: Los clientes que env\'ian invocaciones de transacciones a los \emph{endorsers} y transmiten las propuestas de transacciones al servicio de ordenaci\'on.
 	
 	
-	\item Nodos Pares: O \emph{peers}, qui\'enes ejecutan trasacciones y mantienen el estado y una copia del ledger. Pueden asumir el rol de endosadores o endorsers.
+	\item Nodos Pares: O \emph{peers}, qui\'enes ejecutan transacciones y mantienen el estado y una copia del ledger. Pueden asumir el rol de endosadores o endorsers.
 	
-	\item Nodos Ordenadores: El conjunto de estos nodos conforman lo que se le llama servicio de ordenamiento, el cual se encarga de ordernar las trasacciones endosadas y empaquetarlas en bloques. De igual forma se ocupan de darle un orden a dichos bloques siguiendo un protocolo de consenso como se comentaba anteriormente. Su segundo objetivo consiste en distribuir dichos bloques entre los peers para su posterior validaci\'on.
+	\item Nodos Ordenadores: El conjunto de estos nodos conforman lo que se le llama servicio de ordenamiento, el cual se encarga de ordernar las transacciones endosadas y empaquetarlas en bloques. De igual forma se ocupan de darle un orden a dichos bloques siguiendo un protocolo de consenso como se comentaba anteriormente. Su segundo objetivo consiste en distribuir dichos bloques entre los peers para su posterior validaci\'on.
 	
 \end{enumerate}
 
-Aqu\'i es importante destacar c\'omo el hecho de separar el endosamiento de ejecuci\'on de chaincode (en los peers) del servicio de ordenamiento elimina el embotellamiento, lo cual le provee a HLF ventajas de desempe\~no y escalabilidad sobre los sistemas que ejecutan ambas fuciones en los mismos nodos.
-
+Es importante destacar c\'omo el hecho de separar el endosamiento de la ejecuci\'on de chaincode (en los nodos peers) del servicio de ordenamiento, evita posibles cuellos de botella en el procesamiento de las transacciones, lo cual le provee a HLF ventajas de desempe\~no y escalabilidad sobre los sistemas que ejecutan ambas funciones en los mismos nodos.
+%el embotellamiento
 %arquitectura de HLF?
  
 \subsection{Flujo}
 
-La mayor\'ia de las blockchains utilizan un paradigma nombrado \emph{order-execute} que requiere, para alcanzar el consenso, que los smart contracts a utilizar sean deterministas. Lo anterior limita su programaci\'on a lenguajes de dominio espec\'ifico que eliminen las operaciones no deterministas. Adem\'as, require que todas las transacciones se ejecuten secuencialmente por todos los nodos, lo que implica que deban ser tomadas medias de protecci\'on extra ante posibles ataques maliciosos que deseen desequilibrar la red.
+La mayor\'ia de las blockchains utilizan un paradigma denominado como \emph{order-execute}. Con el fin de alcanzar el consenso, dicho paradigma requiere que los smart contracts a utilizar sean deterministas. Lo anterior limita la programaci\'on de smart contracts a lenguajes de dominio espec\'ifico que eliminen las operaciones no deterministas. 
 
-En cambio, en Fabric se utiliza un arquitectura llamada \emph{execute-order-validate} que resuelve muchos de los problemas comentados.
+La implementaci\'on de un flujo order-execute implica adem\'as que todas las transacciones se ejecuten secuencialmente por todos los nodos. Luego, ante posibles ataques maliciosos que deseen desequilibrar la red, han de ser tomadas medidas de protecci\'on extra.
+%yo creo que aqui de lo que se habla es de q si hay un error en el smart contract ejecutado se replica en todos los nodos de la red
+
+En cambio, en Fabric se utiliza un arquitectura conocida como \emph{execute-order-validate}, que resuelve muchos de los problemas comentados.
 
 Dicho modelo consta de tres pasos:
 \begin{enumerate}
-	\item Primeramente se ejecuta una trasacci\'on, se chequea su correctitud y se respalda (proceso de \emph{endorsement}).
+	\item Primeramente, se ejecuta una transacci\'on, se chequea su correctitud y se respalda (proceso de \emph{endorsement}).
 	
-	\item Luego se ordenan las trasacciones a partir del protocolo de consenso.
+	\item Luego se ordenan las transacciones a partir del protocolo de consenso.
 	
 	\item Se validan teniendo en cuenta la pol\'itica de endosamiento espec\'ifica a la aplicaci\'on manejada y, por \'ultimo, se aplican al ledger.
 \end{enumerate}
 
-Las pol\'iticas de endosamiento a las que se hace referencia dictan qu\'e nodos par y cu\'antos de ellos deben garantizar la correcta ejecuci\'on de un contrato inteligente determinado. De esta forma se asegura que solo un subcojunto de los peers deba ejecutarlo. Esto facilita que el sistema sea m\'as escalable y tenga un mejor desempe\~no con la capacidad a\~nadida de ejecuciones en paralelo.
+Las pol\'iticas de endosamiento a las que se hace referencia dictan qu\'e nodos par y cu\'antos de ellos deben garantizar la correcta ejecuci\'on de un contrato inteligente determinado. De esta forma se asegura que solo un subconjunto de los peers deba ejecutarlo. Esto facilita que el sistema sea m\'as escalable y tenga un mejor desempe\~no con la capacidad a\~nadida de ejecuciones en paralelo.
 
-Igualmente, ha de notarse c\'omo se elimimina el no determinismo, al poder filtrar los resultados inconsistentes antes de pasar a la fase de ordering.
+Igualmente, ha de notarse c\'omo se elimina el no determinismo, al poder filtrar los resultados inconsistentes antes de pasar a la fase de ordering.
 
-Dicho cambio de arquitectura contituye una de las caracter\'isticas que realzan la importancia de HLF. Este nuevo modelo que implementa hace posible la programaci\'on de chaincode en lenguajes est\'andar como Python, Java y Javascript. V\'ease su grandeza de facilitar al programador el crear un v\'inculo con esta nueva DLT, ahorr\'andole horas de estudio para aprender un nuevo lenguaje de programaci\'on y de debugueo para encontrar errores nunca tratados por \'el.
+Dicho cambio de arquitectura constituye una de las caracter\'isticas que realzan las ventajas de HLF ante otras blockchains. Este nuevo modelo que implementa, hace posible la programaci\'on de chaincode en lenguajes de propósito general como Python, Java y Javascript. V\'ease las facilidades que le brinda al programador para crear un v\'inculo con esta nueva DLT, ahorr\'andole horas de estudio para aprender un nuevo lenguaje de programaci\'on y de depuraci\'on para identificar errores. %nunca tratados por \'el.
 
-Precisamente en esta capacidad de Fabric es en la que se apoya este proyecto, puesto que es la que har\'a posible la programaci\'on de smart contracts en C\# una vez implementado el engranaje apropiado.
+%est\'andar por de propostio general
+
+Precisamente en dicha capacidad de Fabric se fundamenta el presente proyecto, la cual har\'a posible la programaci\'on de smart contracts en C\# tras la implementaci\'on del engranaje apropiado.
  
-\section{Mecanismos de autenticaci\'on y\\ permisionamiento en Fabric}
+\section{Mecanismos de autenticaci\'on y\\ autorizaci\'on en Fabric}
 %considrar un nombre mas  apropiado (Servicios de membresia)
 Como se ha mencionado anteriormente, una de las caracter\'isticas m\'as destacadas de HLF resulta el hecho de ser una red privada y permisionada. Esto significa que opera sobre un conjunto de participantes verificados que solo pueden interatuar con la red cuando el administrador oportuno le ha concedido los permisos requeridos. 
 
 Bajo este principio de governanza se garantiza cierto nivel de confianza, puesto que, aunque los usuarios no se conozcan entre s\'i, toda acci\'on realizada queda registrada identificando de forma un\'ivoca a su ejecutor. As\'i, en caso de detectarse alguna anomal\'ia, es posible identificar y rastrear al responsable, y tomar las medidas necesarias para solucionar el incidente.
 
-A continuaci\'on se describen con un poco m\'as de profundidad los mecanismos implementados por Fabric para asegurar el correcto funcionamiento de este modelo permisionado.
+A continuaci\'on, se describen con un poco m\'as de profundidad los mecanismos implementados por Fabric para asegurar el correcto funcionamiento de este modelo permisionado.
 
 \subsection{Infraestructura de Clave P\'ublica (PKI)}
-Una infraestructura de clave p\'ublica (PKI del ingl\'es Public Key Infraestructure) es una colección de tecnolog\'ias de Internet que proporciona comunicaciones seguras en una red. Enlaza llaves con entidades y provee los servicios necesarios para la correcta administraci\'on de certificados digitales y el cifrado de clave p\'ublica.
+Una infraestructura de clave p\'ublica (PKI del ingl\'es Public Key Infraestructure) es una colección de tecnolog\'ias de Internet que proporciona comunicaciones seguras en una red. Enlaza llaves criptogr\'aficas con entidades y provee los servicios necesarios para la correcta administraci\'on de certificados digitales y el cifrado de clave p\'ublica.
 
 Cada PKI cuenta elementos claves como son:
 \begin{enumerate}
@@ -176,7 +188,7 @@ La Fabric CA est\'a conformada por dos componentes: un servidor y un cliente. En
 	\label{fig:cadiagram}
 \end{figure}
 
-Para interactuar con la Fabric CA se pueden utilizar o bien el Fabric CA client [\cite{caclient}] o el SDK correspondiente al lenguaje con el que se desarrolle la aplicaci\'on en concreto. Todas la comunicaciones se realizan a trav\'es de de REST APIs [\cite{restapifaclient}], s\'olo que los componentes anteriores funcionan como interfaces al servidor. Resultan una envoltura m\'as adecuada para los no tan amigables pedidos REST.
+Para interactuar con la Fabric CA se pueden utilizar o bien el Fabric CA client [\cite{caclient}] o el SDK correspondiente al lenguaje con el que se desarrolle la aplicaci\'on en concreto. Todas las comunicaciones se realizan a trav\'es de REST APIs [\cite{restapifaclient}], s\'olo que los componentes anteriores funcionan como interfaces al servidor. Resultan una interfaz m\'as adecuada ante los no tan amigables pedidos REST.
 
 El cliente o el fabric sdk pueden conectarse a un servidor en un grupo de servidores de HLF. En la imagen \ref{fig:cadiagram} se puede observar c\'omo el cliente accede a un \emph{endpoint} (HA Proxy) que equilibra la carga del tr\'afico hacia uno de los miembros del cl\'uster. Todos los miembros comparten una misma base de datos para el almacenamiento de identidades y certificados. En caso de configurarse el LDAP, la informaci\'on referente a las identidades se mantiene en un registro de este tipo.
 
@@ -211,7 +223,7 @@ Una carpeta MSP local est\'a compuesta por:
 	\item Una carpeta de \emph{admincerts} que lista las identidades que definen actores con el rol de administradores en la organizaci\'on. En versiones posteriores a la 1.4.3 no existe; en cambio, se definen los administradores en el momento de creaci\'on de la entidad, cuando la CA determina el valor de la propiedad \emph{Node OU rol} del certificado.
 	
 	
-	\item Una carpeta \emph{keystore} con la llave privada del nodo correspondiente (ya sea par, ordenador o cliente). Dada su utilidad para la firma de trasacciones y respuestas se limita su acceso a los administradores del nodo en s\'i. 
+	\item Una carpeta \emph{keystore} con la llave privada del nodo correspondiente (ya sea par, ordenador o cliente). Dada su utilidad para la firma de transacciones y respuestas se limita su acceso a los administradores del nodo en s\'i. 
 	
 	\item Para nodos pares u ordenadores una \emph{signcert} que contine el certificado generado por la CA. Representa su identidad y junto a su llave privada correspondiente puede ser utilizada para la creaci\'on de firmas.
 	
@@ -225,7 +237,7 @@ Puesto que en el caso del MSP de canal no se necesitan habilidades de firma sino
 
 \section{Fabric SDKs y Fabric Gateways} 
 
-Las aplicaciones que deseen interactuar con el ledger han de hacerlo por medio de un intermediario, un \emph{Software Development Kit (SDK)} o paquete de desarrollo de \emph{software}. Los espec\'ificos a HLF est\'an dise\~nados para comunicarse con los smart contracts, encargados a su vez de realizar las operaciones de \emph{get, put, delete} sobre el world state y registrar las trasacciones en la blockchain.%deben hacerlo
+Las aplicaciones que deseen interactuar con el ledger han de hacerlo por medio de un intermediario, un \emph{Software Development Kit (SDK)} o paquete de desarrollo de \emph{software}. Los espec\'ificos a HLF est\'an dise\~nados para comunicarse con los smart contracts, encargados a su vez de realizar las operaciones de \emph{get, put, delete} sobre el world state y registrar las transacciones en la blockchain.%deben hacerlo
 
 Hyperledger Fabric ofrece un n\'umero de SDKs para el desarrollo de aplicaciones en una amplia variedad de lenguajes de programaci\'on. Actualmente cuenta con soporte para Node.js [\cite{sdknode}] y Java [\cite{sdkjava}], los primeros en aparecer. Igualmente, a pesar de a\'un no haber sido publicados de forma oficial, expone para su descarga y prueba implementaciones para Go [\cite{sdkgo}] y Python [\cite{sdkpython}].
 
@@ -239,10 +251,10 @@ Dado que el objetivo del presente trabajo gira en torno a estas funcionales, son
 
 \subsection{Caracter\'isticas de los Fabric SDKs}
 
-En general los 4 repos de Fabric SDK existentes siguen las especificaciones de [\cite{fabricsdkspec}], proveyendo las primitivas para acceder a las funcionalidades b\'asicas de la red desde una capa de abstracci\'on que aligera la carga del usuario. Permiten a los desarrolladores interactuar con la blockchain para desplegar e invocar chaincode, escuchar eventos que se puedan generar y recuperar informaci\'on acerca los bloques y trasacciones salvaguardados en el ledger. 
+En general los 4 repos de Fabric SDK existentes siguen las especificaciones de [\cite{fabricsdkspec}], brindando las primitivas para acceder a las funcionalidades b\'asicas de la red desde una capa de abstracci\'on que aligera la carga del usuario. Permiten a los desarrolladores interactuar con la blockchain para desplegar e invocar chaincode, escuchar eventos que se puedan generar y recuperar informaci\'on acerca los bloques y transacciones salvaguardados en el ledger. 
 
 %following paragraph should be supported with examples
-El de Go resulta un poco diferente al resto en cuanto a estilo e implementaci\'on; posee un mayor nivel de abstracci\'on que le facilita al programador el proceso de acoplamiento con la plataforma. Los de Java y Node disponen de una capa extra que separa las funciones para el desarrollo de aplicaciones de las administrativas. As\'i, aunque cada uno le aporta las caracter\'isticas propias del lenguaje en particular y le adiciona las modificaciones consideradas prudentes, todos se ajustan a la misma idea central.
+El SDK de Go resulta un poco diferente al resto en cuanto a estilo e implementaci\'on; posee un mayor nivel de abstracci\'on que le facilita al programador el proceso de acoplamiento con la plataforma. Los de Java y Node disponen de una capa extra que separa las funciones para el desarrollo de aplicaciones de las administrativas. As\'i, aunque cada uno le aporta las caracter\'isticas propias del lenguaje en particular y le adiciona las modificaciones consideradas prudentes, todos se ajustan a la misma idea central.
 
 % diesnnado en un estilo orientado a objeto. su disenno modular permite a los desarrolladores unir sus implementaciones alternativas para manehar eventos de ocnfirmacion de trasanacciones , evaluacion o query,e tc
 
@@ -259,7 +271,7 @@ Tomemos como ejemplo el de Node.js para un an\'alisis a mayor profundidad. Este 
 %[esto puede ponerse aqui o pasarlo a la parte de propuesta]
 %Escribir aqui un poquito de las notas que hay en la libreta sobre que hace cada repo
 
-El m\'odulo \texttt{fabric-ca-client}, el de mayor inter\'es para este proyecto, es el que provee las capadidades para interactuar con la Fabric CA para el manejo de entidades.  Permite registrar usuarios, inscribirlos para obtener el certificado correspondiente firmado por la Ca,  revocar certificados, revocar usuarios seg\'un su \emph{enrollmentId} o n\'umero identificador de inscripci\'on, entre otros.
+El m\'odulo \texttt{fabric-ca-client}, el de mayor inter\'es para este proyecto, es el que provee las capacidades para interactuar con la Fabric CA para el manejo de entidades.  Permite registrar usuarios, inscribirlos para obtener el certificado correspondiente firmado por la Ca,  revocar certificados, revocar usuarios seg\'un su \emph{enrollmentId} o n\'umero identificador de inscripci\'on, entre otros.
 
 Para poder acceder a estas funcionalidades la biblioteca cuenta con la clase 
 \\
