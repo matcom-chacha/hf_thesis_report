@@ -169,12 +169,12 @@ Provee funcionalidades tales como:
 
 La Fabric CA est\'a conformada por dos componentes: un servidor y un cliente. En la imagen \ref{fig:cadiagram} se puede apreciar c\'omo el servidor Fabric CA encaja en la arquitectura general de Hyperledger Fabric.
 
-%\begin{figure}[h]
-%	\centering
-%	\includegraphics[scale=0.3]{Graphics/fabric-ca}
-%	\caption{Fabric CA en comunicaci\'on con una red de Hyperledger Fabric.}
-%	\label{fig:cadiagram}
-%\end{figure}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.3]{Graphics/fabric-ca}
+	\caption{Fabric CA en comunicaci\'on con una red de Hyperledger Fabric.}
+	\label{fig:cadiagram}
+\end{figure}
 
 Para interactuar con la Fabric CA se pueden utilizar o bien el Fabric CA client [\cite{caclient}] o el SDK correspondiente al lenguaje con el que se desarrolle la aplicaci\'on en concreto. Todas la comunicaciones se realizan a trav\'es de de REST APIs [\cite{restapifaclient}], s\'olo que los componentes anteriores funcionan como interfaces al servidor. Resultan una envoltura m\'as adecuada para los no tan amigables pedidos REST.
 
