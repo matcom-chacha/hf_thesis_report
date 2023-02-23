@@ -18,14 +18,14 @@ Si bien la primera propuesta de blockchain conocida data de 1982 [\cite{chaum197
 
 Desde la creaci\'on de Ethereum [\cite{ethereum2014ethereum}] como plataforma no s\'olo para criptomonedas, sino como ambiente para la programaci\'on y el despliegue de contratos inteligentes, comenzaron a desarrollarse un sinn\'umero de aplicaciones sobre este tipo de redes.
 
-As\'i, las blockchains como registros digitales distribuidos, p\'ublicos e inmutables han mostrado su val\'ia en m\'ultiples esferas de la vida cotidiana. Se han aplicado a la medicina, la agricultura, el arte, la educaci\'on, la energ\'ia, para la verificaci\'on y el trazado de activos y el manejo de t\'itulos y escrituras [\cite{engelhardt2017hitching} , \cite{abou2019blockchain}].
+As\'i, las blockchains como registros digitales distribuidos, p\'ublicos e inmutables han mostrado su val\'ia en m\'ultiples esferas de la vida cotidiana. Se han aplicado a la medicina, la agricultura, el arte, la educaci\'on, la energ\'ia, para la verificaci\'on y el trazado de activos y el manejo de t\'itulos y escrituras [\cite{abou2019blockchain}, \cite{engelhardt2017hitching}].
 
 %Pero, qu\'e sucede con el entorno empresarial?
 %Blockchain helps in the verification and traceability of multistep transactions needing verification and traceability. It can provide secure transactions, reduce compliance costs, and speed up data transfer processing. Blockchain technology can help contract management and audit the origin of a product. It also can be used in voting platforms and managing titles and deeds.
 
 %Internet of Things, energy, finance, healthcare, and government
 
-N\'otese que la mayor\'ia de las blockchains conocidas son p\'ublicas o \emph{permissionless}, lo que significa que cualquiera puede interactuar en ellas. Sin embargo, en entornos del tipo empresarial se requiere en muchas ocasiones controlar qui\'enes tienen acceso a la red. Por ejemplo, regulaciones del tipo \emph{Know-Your-Customer (KYC)} y \emph{Anti-Money Laundering (AML)} en el ambiente finaciero exigen conocer qui\'en realiza cada transacci\'on. 
+N\'otese que la mayor\'ia de las blockchains conocidas son p\'ublicas o \emph{permissionless}, lo que significa que cualquiera puede interactuar en ellas. Sin embargo, en entornos del tipo empresarial se requiere en muchas ocasiones controlar qui\'enes tienen acceso a la red. Por ejemplo, regulaciones del tipo \emph{Know-Your-Customer (KYC)} y \emph{Anti-Money Laundering (AML)} en el ambiente financiero exigen conocer qui\'en realiza cada transacci\'on. 
 
 A ra\'iz de estos y otros requerimientos funcionales, se han modificado numerosas redes existentes de anta\~no y se han creado otras espec\'ificas al sector empresarial. En este \'utltimo grupo se enmarca \emph{Hyperledger Fabric (HLF)} [\cite{androulaki2018hyperledger}], como una tecnolog\'ia de redes distribuidas (del ingl\'es \emph{Distributed Ledger Technology DLT}) dise\~nada para encajar en este panorama.%****Aqui es valido hacer la aclaracion de que DLT no es precisamente blockchain, sino q es mas amplio
 %destacar sobresalir dominar
@@ -50,16 +50,16 @@ El Instituto de Criptograf\'ia de la Universidad de La Habana trabaja desde hace
 %radica en la UH? Aclarar esto
 %notese que python ya tiene alguito pero de C\Sharp todavia nada, por tanto resulta novedoso
 
-Este trabajo en particular pretende proseguir con el desarrollo de mecanismos que permitan la programaci\'on de contratos inteligentes en C\# para Hyperlegder Fabric.
+Este trabajo en particular, pretende proseguir con el desarrollo de mecanismos que permitan la programaci\'on de contratos inteligentes en C\# para Hyperlegder Fabric.
 
 Para dar continuidad a dicha investigaci\'on, resulta de inter\'es interactuar con el servidor de la autoridad certificadora de Fabric (Fabric-CA), a trav\'es de su REST-API, y as\'i administrar el ciclo de vida de los certificados de usuario. Dichos certificados son la base de la identificaci\'on de individuos mencionada con anterioridad. 
 
 Las plataformas desarrolladas para el intercambio entre cada lenguaje particular y la blockchain de HLF, los Fabric-SDK, cuentan con un componente \emph{fabric-ca-client} que facilita a las aplicaciones registrar nodos y usuarios, y establecer identidades confiables en la red. Luego, teniendo en cuenta la hipótesis de que “es viable la concepci\'on de un mecanismo similar a los existentes para extender las capacidades de interacci\'on con la red de Hyperledger Fabric al lenguaje de programaci\'on C\#”, es posible entonces exponer como objetivos
-generales de esta tesis: “Diseñar e implementar el m\'odulo \texttt{fabric-ca-client} como m\'odulo inicial de un Fabric-SDK escrito en C\#, con el fin de poder interactuar con Fabric Ca de HLF utilizando el lenguaje mencionado”.
+generales de esta tesis: “Diseñar e implementar el m\'odulo \texttt{fabric-ca-client} como m\'odulo inicial de un Fabric-SDK escrito en C\#, con el fin de poder interactuar con la Fabric CA de HLF utilizando el lenguaje mencionado”.
 
 %“dise\~nar e implementar un m\'odulo \texttt{fabric-ca-client} para interactuar con el Fabric-CA empleando C Sharp”.
 
-Con el fin de dar cumplimiento a estos objetivos generales se pueden listar los siguientes objetivos específicos:
+En orden de dar cumplimiento a estos objetivos generales se pueden listar los siguientes objetivos específicos:
 
 %También brinda soporte para envíos de transacciones seudónimas.
  
