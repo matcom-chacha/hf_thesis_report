@@ -1,6 +1,16 @@
--Web of Science Core Collection WOC
+[-]Web of Science Core Collection WOC
+-Proof of work
+-Proof of stake
 -Annadir una nota aclarando que DLT y blockchain no son lo mismo
 -SDKs
 -grpc
 -X.509 certificates
 -LDAP
+-OpenID Connect
+-Node OUs
+-AKI: aki It contains a key identifier which is derived from the public key in the issuer certificate.
+-serial number of a cert: The serial number is a unique number issued by the certificate issuer, which is also called the Certificate Authority (CA).
+-ECDSA keys?
+
+-------------------------------------------------------------------------------------
+Web of Science Core Collection WOC: 
