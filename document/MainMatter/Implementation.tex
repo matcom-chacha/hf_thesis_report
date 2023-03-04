@@ -1,4 +1,4 @@
-\chapter{Experimentos y Resultados}\label{chapter:implementation}
+\chapter{Experimentaci\'on y resultados}\label{chapter:implementation}
 % nativo 
 Hasta aqu\'i se han expuesto los elementos fundamentales en la creaci\'on de un kit de desarrollo de software para C\# que cubra las funcionalidades b\'asicas para la comunicaci\'on con una CA de HLF. A continuaci\'on se presentan algunos de los experimentos llevados a cabo para probar su eficacia, a la vez que se indica la forma para interactuar con esta plataforma. Finalmente se comentan los resultados generales de este proyecto.
 
@@ -7,7 +7,7 @@ Para testear el funcionamiento del SDK implementado se llevaron a cabo numerosos
 En la soluci\'on propuesta se agregan dos archivos de tests: \texttt{CAServiceTests}, que re\'une las pruebas relacionadas con la clase \texttt{CaService} y \texttt{CAClient}; y un \texttt{WalletTests}, que analiza todo lo referente a las billeteras. Aunque los nombres de los archivos de prueba pueden ser arbitrarios, en este caso se adopta una convención de nomenclatura que utiliza el nombre de la clase a probar con la terminaci\'on Test. Lo mismo para cada m\'etodo espec\'ifico, a\~nadiendo tambi\'en en los casos necesarios una mini descripci\'on del objetivo o el comportamiento esperado. Se espera este estándar facilite la comprensi\'on del c\'odigo para futuros desarrolladores del proyecto, y que sea utilizado para los nuevos aportes.
 % de la prueba especifica.
 
-En la clase \texttt{CAServiceTests} se implementaron tests para chequear comportamientos como: 
+La clase \texttt{CAServiceTests} contempla tests que chequean comportamientos como: 
 
 \begin{enumerate}
 	\item Que a trav\'es una llamada de registro fuera posible inscribir a un usuario.
@@ -120,3 +120,9 @@ Debe aclararse que para este sistema bajo prueba ("SUT" seg\'un la terminolog\'i
 
 %pruebas de integración de lectura, escritura, actualización y eliminación 
 
+Tras este proceso de experimentaci\'on pudo comprobarse que la implementaci\'on propuesta cuenta con un c\'odigo robusto, libre de errores, capaz de satisfacer las funcionalidades b\'asicas para las que fue concebido.
+
+N\'otese que fueron seguidas las normativas de Fabric para el desarrollo de extensiones y contribuciones a su plataforma. Cada clase y m\'etodo del SDK, as\'i los ejemplos de prueba, fueron bien documentados. Adem\'as, fue dise\~nado cuidadosamente teniendo en cuenta la facilidad de uso para los desarrolladores a los que va destinada la plataforma.
+
+El uso de interfaces y el encapsulamiento en clases que C\# facilita, permiti\'o estructurar el proyecto en forma que futuros trabajos para extenderlo puedan ser acoplados sin dificultad. Esto garantiza la escalabilidad horizontal, de gran importancia en este tipo de trabajos que se proyectan a largo plazo. 
+%la posibilidad de trabajr con acciones asincronas, las interfaces para hacerlo mas extensible
