@@ -1,10 +1,10 @@
 \chapter{Experimentos y Resultados}\label{chapter:implementation}
 % nativo 
-Hasta aqu\'i se han expuesto los elementos fundamentales en la creaci\'on de un kit de desarrollo de software para C\# que cubra las funcionalidades b\'sicas para la comunicaci\'on con una CA de HLF. A continuaci\'on se presentan algunos de los experimentos llevados a cabo para probar su eficacia, a la vez que se indica la forma para interactuar con esta plataforma. Finalmente se comentan los resultados generales de este proyecto.
+Hasta aqu\'i se han expuesto los elementos fundamentales en la creaci\'on de un kit de desarrollo de software para C\# que cubra las funcionalidades b\'asicas para la comunicaci\'on con una CA de HLF. A continuaci\'on se presentan algunos de los experimentos llevados a cabo para probar su eficacia, a la vez que se indica la forma para interactuar con esta plataforma. Finalmente se comentan los resultados generales de este proyecto.
 
-Para testear el funcionamiento del SDK implementado se llevaron a cabo numerosos experimentos contra un servidor de Fabric CA. Los m\'as relevantes fueron registrados en un proyecto separado dentro de la soluci\'on, nombrado \texttt{Test}. En este proyecto se recogieron una serie de pruebas unitarias (del ingl\'es \emph{Unit Tests}) [\ref{unitTest}] sobre cada componente aislado, desglosando la funcionalidad de cada clase en comportamientos discretos que fuera posible probar como unidades individuales.
+Para testear el funcionamiento del SDK implementado se llevaron a cabo numerosos experimentos contra un servidor de Fabric CA. Los m\'as relevantes fueron registrados en un proyecto separado dentro de la soluci\'on, nombrado \texttt{Test}. En este proyecto se recogieron una serie de pruebas unitarias (del ingl\'es \emph{Unit Tests} [\cite{unittestvs}]) sobre componentes aislados, desglosando la funcionalidad de cada clase en comportamientos discretos que fuera posible probar como unidades individuales.
 
-En la soluci\'on propuesta se agregan dos archivos de tests: el mencionado \texttt{CAServiceTests}, que re\'une las pruebas relacionadas con la clase \texttt{CaService} y \texttt{CAClient}; y un \texttt{WalletTests}, que analiza todo lo referente a las billeteras. Aunque los nombres de los archivos de prueba pueden ser arbitrarios, en este caso se adopta una convención de nomenclatura que utiliza el nombre de la clase a probar con la terminaci\'on Test. Lo mismo para cada m\'etodo espec\'ico, a\~nadiendo tambi\'en en los casos necesarios una mini descripci\'on del objetivo o el comportamiento esperado. Se espera este estándar facilite la comprensi\'on del c\'odigo para futuros desarrolladores del proyecto, y que estos adem\'as consideren utilizarlo para sus porpios aportes.
+En la soluci\'on propuesta se agregan dos archivos de tests: \texttt{CAServiceTests}, que re\'une las pruebas relacionadas con la clase \texttt{CaService} y \texttt{CAClient}; y un \texttt{WalletTests}, que analiza todo lo referente a las billeteras. Aunque los nombres de los archivos de prueba pueden ser arbitrarios, en este caso se adopta una convención de nomenclatura que utiliza el nombre de la clase a probar con la terminaci\'on Test. Lo mismo para cada m\'etodo espec\'ifico, a\~nadiendo tambi\'en en los casos necesarios una mini descripci\'on del objetivo o el comportamiento esperado. Se espera este estándar facilite la comprensi\'on del c\'odigo para futuros desarrolladores del proyecto, y que sea utilizado para los nuevos aportes.
 % de la prueba especifica.
 
 En la clase \texttt{CAServiceTests} se implementaron tests para chequear comportamientos como: 
@@ -35,7 +35,7 @@ En la clase \texttt{CAServiceTests} se implementaron tests para chequear comport
 	%que se registren los atributos provistos etc. 
 \end{enumerate}
 
-La clase \texttt{WalletTests} se centra en comprobar que las operaciones caracterist\'icas de una billetera realmente modifiquen el sistema de archivos. Por ejemplo el test \ref{code:walletput} intenta a\~nadir al wallet una identidad en representaci\'on de un admin ya inscrito y comprueba luego que el directorio contenga la informaci\'on al respecto.
+Por otro lado, la clase \texttt{WalletTests} se centra en comprobar que las operaciones caracterist\'icas de una billetera realmente modifiquen el sistema de archivos. Por ejemplo, el test \ref{code:walletput} intenta a\~nadir al wallet una identidad en representaci\'on de un admin ya inscrito, comprobando luego que el directorio contenga la informaci\'on al respecto.
 
 %aclarar que antes ya se habi creado el wallet
 \begin{lstlisting}[caption={Test para chequear el m\'etodo \texttt{Put} de la clase \texttt{Wallet}.}, label={code:walletput}]
@@ -62,7 +62,9 @@ public void PutTest() {
 
 %[describir en el ejemplo El patrón AAA (Organizar, Actuar, Afirmar) es una forma común de escribir pruebas unitarias para un método bajo prueba.]
 
-Importante tambi\'en fue el realizar pruebas de integraci\'on (\emph{Integration Tests}) [\ref{integrationTest}] para evaluar los componentes de la aplicación en un nivel más amplio. Estas se enfocan en verificar que los componentes del SDK funcionen juntos para producir el resultado esperado. Por ejemplo continando con el \texttt{Wallet}, resulta evidente la necesidad de comprobar que, tras cargar una identidad previamente guardada, sus valores originales no se vean corrompidos y no se afecte el flujo de ejecuci\'on. En el fragmento de c\'odigo \ref{code:walletFlow} se almacena en la billetera la identidad de un admin, se recupera y se realizan una serie de operaciones bajo su comando, como el registrar un nuevo usuario, inscribirlo y revocarle luego sus permisos.
+Importante tambi\'en fue el realizar pruebas de integraci\'on (\emph{Integration Tests}) para evaluar los componentes de la aplicación en un nivel más amplio. Estas se enfocan en verificar que los elementos dispersos del SDK funcionen en conjunto para producir el resultado esperado.
+
+Por ejemplo, continando con el \texttt{Wallet}, resulta evidente la necesidad de comprobar que, tras cargar una identidad previamente guardada, sus valores originales no se vean corrompidos ni se afecte el flujo de ejecuci\'on. En el fragmento de c\'odigo \ref{code:walletFlow} se almacena en la billetera la identidad de un admin, se recupera y se realizan una serie de operaciones bajo su comando (d\'igase el registrar un nuevo usuario, inscribirlo y revocarle luego sus permisos).
 
 \begin{lstlisting}[caption={Test para verificar el comporamiento de un flujo completo utilizando identidades de una billetera.}, label={code:walletFlow}]
 [TestMethod()]
@@ -114,7 +116,7 @@ N\'otese que todos estos tests resultan relevantes no s\'olo en el momento prese
 
 %Base de datos, sistema de archivos, Dispositivos de red, Tubería de solicitud-respuesta
 
-Debe aclararse que para este sistema bajo prueba ("SUT" seg\'un la terminolog\'ia utilizada por la documentaci\'on oficial) no se escribieron tests de integración para cada permutación de datos posibles, se consideraron un conjunto de pruebas enfocadas en las funcionalidades b\'asicas del sdk y las rutinas m\'as comunes. Esto suele ser lo recomendado y generalmente suficiente para probar adecuadamente un sistema. 
+Debe aclararse que para este sistema bajo prueba ("SUT" seg\'un la terminolog\'ia utilizada por la documentaci\'on oficial) no se escribieron tests de integración para cada permutación de datos posibles. Solo se consideraron un conjunto de pruebas enfocadas en las funcionalidades b\'asicas del sdk y las rutinas m\'as comunes. Esto suele ser lo recomendado y generalmente suficiente para probar adecuadamente un sistema. 
 
 %pruebas de integración de lectura, escritura, actualización y eliminación 
 
