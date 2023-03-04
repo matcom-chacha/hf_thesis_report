@@ -1,23 +1,16 @@
 \begin{recomendations}
-    Recomendaciones
-    Deben ser elaboradas atendiendo a las siguientes
-    cuestiones:
-    • En qué aspectos se propone trabajar más para
-    completar o ampliar el trabajo realizado.
-    • La posibilidad, a partir del trabajo realizado, de
-    resolver problemas similares en otras esferas.
-    • Consideraciones sobre las condiciones necesarias
-    para introducir los resultados a la práctica
-    pedagógica.
-    
-    Anexos
-    
-    • Se presentan al final del informe.
-    • Cada anexo debe estar titulado y numerado 
-    consecutivamente en correspondencia con su 
-    referencia en el informe. 
-    • En los anexos se incluye el material auxiliar que no 
-    aparece en el texto del informe, se incluyen por lo 
-    general: tablas, gráficos, ilustraciones, algoritmos, 
-    fragmentos de código, etc.
+Como se ha comentado, la implementaci\'on propuesta no constituye m\'as que un primer acercamiento para a\~nadir soporte al desarrollo de aplicaciones sobre Hyperledger Fabric utilizando C\#. Teniendo esto es cuenta, es posible indicar un conjunto de l\'ineas a seguir en funci\'on de acercar el trabajo futuro hacia al objetivo propuesto:
+
+\begin{enumerate}
+	%lo del user
+	%extender test para cubirs otros comportamientos que pueden haberlse saltado
+	\item Refactorizar el c\'odigo para encapsular ciertos comportamientos en clases espec\'ificas, como los par\'ametros requeridos en cada intecambio con la CA. Esto facilitar\'ia el control de errores y ajustar\'ia m\'as el al paradigma de orientaci\'on a objetos del lenguaje utilizado.
+	
+	\item Ampliar las funcionalidades de la clase \emph{CriptoPrimitives}, mediante la inclusi\'on de los m\'etodos de \emph{Encrypt}, \emph{Decrypt} y \emph{Verify}.
+	
+	\item Extender la clase \emph{WalletStore} e implementar la clase \emph{HsmX509Identity} para brindar a las apliciones un medio m\'as seguro donde salvaguardar su material criptogr\'afico.
+\end{enumerate}
+
+Las funcionalidades recomendadas responden fudamentalmente al trabajo efectuado hasta el momento. En el futuro se podr\'ia proseguir con otros elementos del m\'odulo \texttt{FabricNetwork} y \texttt{FabricCommon} que permitan conectarse a una red de Fabric, acceder a una canal e instanciar y consultar chaincodes.
+
 \end{recomendations}
