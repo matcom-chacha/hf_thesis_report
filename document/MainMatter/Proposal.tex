@@ -151,8 +151,13 @@ public async Task<Tuple<string, string>> Enroll(string enrollmentId, string enro
 
 		... // parse response, verify the call succeeded
 
-		string signedPem = Encoding.UTF8.GetString(Convert.FromBase64String(result["Cert"]?.Value<string>() ?? ""));
-		string caChain = Encoding.UTF8.GetString(Convert.FromBase64String(result["ServerInfo"]["CAChain"]?.Value<string>() ?? ""));
+		string signedPem = Encoding.UTF8.GetString(
+			Convert.FromBase64String(
+				result["Cert"]?.Value<string>() ?? ""));
+		
+		string caChain = Encoding.UTF8.GetString(
+			Convert.FromBase64String(
+result["ServerInfo"]["CAChain"]?.Value<string>()??""));
 
 		return new Tuple<string, string>(signedPem, caChain);
 	}
@@ -389,16 +394,20 @@ public class Wallet
 	public X509Identity Get(string label){
 		string identityString = _walletStore.Get(label);
 		
-		string decodedIden = Encoding.UTF8.GetString(Convert.FromBase64String(identityString));
+		string decodedIden = Encoding.UTF8.GetString(
+		Convert.FromBase64String(identityString));
 		
-		return X509Identity.FromJson(JObject.Parse(decodedIden));
+		return X509Identity.FromJson(
+		JObject.Parse(decodedIden));
 	}
 
 	public void Put(string label, Identity identity){
 		JObject jsonIdentity = identity.ToJson();
 		
 		string identityString = jsonIdentity.ToString(Formatting.None);
-		_walletStore.Put(label, Convert.ToBase64String(Encoding.UTF8.GetBytes(identityString)));
+		
+		_walletStore.Put(label,Convert.ToBase64String(
+		Encoding.UTF8.GetBytes(identityString)));
 	}
 
 	public void Remove(string label){
