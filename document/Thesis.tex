@@ -29,27 +29,55 @@
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-
+\definecolor{redstrings}{rgb}{0.9,0,0}
 \lstdefinestyle{mystyle}{
-    backgroundcolor=\color{backcolour},   
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{purple},
-    numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\footnotesize,
-    breakatwhitespace=false,         
-    breaklines=true,                 
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbers=left,                    
-    numbersep=5pt,                  
-    showspaces=false,                
-    showstringspaces=false,
-    showtabs=false,                  
-    tabsize=4
+	language=[Sharp]C,
+	backgroundcolor=\color{white},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{blue},
+	morekeywords={partial, var, value, get, set, T},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{redstrings},
+	%    basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=true,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=4,
+	%    
+	frame=lines,
+	escapeinside={(*@}{@*)},
+	%commentstyle=\color{greencomments},
+	basicstyle=\ttfamily,
 }
 
 \lstset{style=mystyle}
+
+%\lstdefinestyle{mystyle}{
+%    backgroundcolor=\color{backcolour},   
+%    commentstyle=\color{codegreen},
+%    keywordstyle=\color{purple},
+%    numberstyle=\tiny\color{codegray},
+%    stringstyle=\color{codepurple},
+%    basicstyle=\ttfamily\footnotesize,
+%    breakatwhitespace=false,         
+%   breaklines=true,                 
+%   captionpos=b,                    
+%    keepspaces=true,                 
+%   numbers=left,                    
+%    numbersep=5pt,                  
+%    showspaces=false,                
+%   showstringspaces=false,
+%    showtabs=false,                  
+%   tabsize=4
+%}
+
+%\lstset{style=mystyle}
 
 \title{Módulo fabric-ca-client \\ del SDK de Fabric \\ para gestionar identidades criptográficas \\ con C\#.}
 \author{\\\vspace{0.25cm}Gabriela B. Mart\'inez Giraldo}
