@@ -284,3 +284,23 @@ Para poder acceder a estas funcionalidades la biblioteca cuenta con la clase
 %Ver en Member Service Provider interface and the COP implementation que definen el enroll y el resto
 
 %Otros detalles ineresantes como concurrencia...
+\subsection{Fabric SDK para C\#}
+
+Hasta el momento el consorcio de Hyperledger no ha revelado trabajos en curso para extender la lista de lenguajes que soporta HLF. Sin embargo, resulta de interés poder disponer de la capacidad de programación de contratos inteligentes en otros lenguajes de amplio uso, como por ejemplo C\#.
+
+Qu\'e elementos concretos de C\# lo hacen ideal para ingresar a esta lista?
+
+C\# es un lenguaje de de programación de propósito general, con un modelo orientado a objetos bien definido. Entre la serie de ventajas que ofrece este potente lenguaje se incluyen:
+
+\begin{enumerate}
+	\item Facilidad de aprender y usar, por lo que resulta una excelente opción para principiantes.
+	%curva de aprendizaje suave
+	\item Sus fuertes lazos con la familia de lenguajes C, lo que hace menos complejo que cualquier ingeniero con una sólida comprensión de C y C++ pueda hacer el cambio.
+	
+	\item Su versatilidad, se suele utilizar para la creaci\'on una amplia gama de aplicaciones.
+	
+	\item El ser un lenguaje maduro, lo que significa que cuenta con un buen soporte y una gran comunidad de desarrolladores. El hecho de que sea un producto original de Microsoft implica que cuenta con el respaldo del gigante tecnológico, lo que se traduce en ayuda de expertos, recursos adicionales y actualizaciones frecuentes. Adem\'as con el tiempo ha reunido un amplio conjunto de bibliotecas y herramientas que facilitan la creación de aplicaciones sólidas, menos propensas a errores.
+\end{enumerate}
+
+Dichas razones, en conjunto con la no existencia de trabajos hasta el momento que acaten esta tarea, el objetivo general de este trabajo de tesis se centra en la creaci\'on de un Fabric SDK para C\#. En el pr\'oximo cap\'itulo se presenta la propuesta de un m\'odulo \emph{FabricCaClient} de dicho SDK para entablar comunicaci\'on con una CA de Fabric. En el futuro se espera dicho proyecto sea extendido para, junto a [\cite{chaincode22csharp}] permitan an\~adir soporte completo para la programaci\'on sobre Hyperledger Fabric en C\#.
+ 
