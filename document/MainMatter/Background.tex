@@ -15,6 +15,11 @@ Entre las ventajas de esta tecnolog\'ia es posible destacar:
 \begin{enumerate}
 	\item  No censura: Una de las caracter\'isticas m\'as relevantes de las plataformas blockchains es que en ellas no suele existir una autoridad centralizada con total control sobre la red. Esto es posible gracias a los mecanismos de consenso como \emph{Proof or Work} o \emph{Proof of Stake}, que aseguran se llegue a un acuerdo respecto al estado del ledger entre todos los nodos.
 	
+	
+	\nomenclature[pos]{\textbf{Proof of Stake (POS)}}{La prueba de participación es un protocolo utilizado en blockchain que permite a los usuarios validar transacciones manteniendo una cierta cantidad de criptomonedas. Este protocolo permite a los usuarios obtener recompensas por tener criptomonedas, lo que ayuda a mantener la red en pie. Fue creado para reemplazar al conocido Proof of Work, aportando una mejor seguridad y escalabilidad a las redes que lo implementen.}
+	
+	\nomenclature[pow]{\textbf{Proof of Work (POW)}}{La prueba de trabajo es un mecanismo de consenso descentralizado que requiere que los miembros de la red se esfuercen en resolver un número hexadecimal encriptado. La prueba de trabajo también se denomina minería, en referencia a recibir una recompensa por el trabajo realizado.}
+		
 	De esta forma, se garantiza una especie de confianza entre elementos desconocidos de la red y se establece un protocolo que impide que una \'unica parte sea capaz de censurar al resto.
 	
 	%Es v\'alido aclarar que en una plataforma altamente configurable como lo es HLF s\'i puede darse el caso en el que el poder de decisi\'on se concentre en unos pocos elementos de la red.
@@ -47,6 +52,10 @@ Fabric posee una arquitectura altamente modular y configurable, capaz de ser ada
 %Aqui pueden referenciarse varios articulos sobre los mecanismo de ordenaicon, solo que considero no son tan relevantes al tema tratado
 
 De igual forma cuenta con protocolos enchufables de gesti\'on de identidad como LDAP u OpenID Connect, con protocolos de gesti\'on de claves o bibliotecas criptogr\'aficas, entre otros.
+
+\nomenclature[ldap]{\textbf{LDAP}}{LDAP es un servicio de directorio que permite que los sistemas compartan información de usuarios y grupos. LDAP se puede utilizar para autenticar usuarios y administrar cuentas y grupos de usuarios.}
+
+\nomenclature[oidc]{\textbf{OpenID Connect}}{Protocolo para autenticar usuarios y emitir tokens. Permite que dos partes, como un sitio web y un usuario, intercambien información de forma segura. Cuando un usuario inicia sesión en un sitio web, OpenID Connect puede verificar que el usuario es quien dice ser y emitir un token que se puede usar para acceder a los recursos protegidos en el sitio web.}
 
 Adem\'as, al utilizar mecanismos de consenso deterministas no requiere del uso de criptomonedas\footnote{aunque podr\'ian ser implementadas en el caso deseado} para incentivar el minado. Lo anterior podr\'ia considerarse como una medida de seguridad adicional, pues evita atraer atacantes que quieran socavar la estabilidad de la red. Adem\'as implica un costo operacional menos elevado de la plataforma.
 
@@ -215,6 +224,8 @@ Una carpeta MSP local est\'a compuesta por:
 
 \begin{enumerate}
 	\item Un archivo \emph{config.yaml} utilizado para configurar la clasificaci\'on de identidades en Fabric al habilitar el \emph{Node OUs} y definir los roles aceptables.
+	
+	%\nomenclature[nodeou]{\textbf{Node OUs}}}Las unidades organizativas de nodo son una forma de agrupar nodos en un tejido. Se utilizan para administrar el ciclo de vida de los nodos, incluido el inicio, la detención y la administración del estado de los nodos.}
 	
 	\item Una carpeta \emph{cacerts} con una lista de certificados autofirmados X.509 de las CAs ra\'iz en las que conf\'ia la organizaci\'on a la que representa el MSP.
 	

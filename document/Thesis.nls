@@ -1,8 +1,42 @@
 \begin{thenomenclature} 
 
+ \nomgroup{A}
+
+  \item [{\textbf{AKI}}]\begingroup El aki de un certificado x509 es el identificador único del certificado. Contiene un identificador de clave que se deriva de la clave pública en el certificado del emisor.\nomeqref {2.0}
+		\nompageref{26}
+
+ \nomgroup{L}
+
+  \item [{\textbf{LDAP}}]\begingroup LDAP es un servicio de directorio que permite que los sistemas compartan información de usuarios y grupos. LDAP se puede utilizar para autenticar usuarios y administrar cuentas y grupos de usuarios.\nomeqref {1.0}
+		\nompageref{6}
+
+ \nomgroup{O}
+
+  \item [{\textbf{OpenID Connect}}]\begingroup Protocolo para autenticar usuarios y emitir tokens. Permite que dos partes, como un sitio web y un usuario, intercambien información de forma segura. Cuando un usuario inicia sesión en un sitio web, OpenID Connect puede verificar que el usuario es quien dice ser y emitir un token que se puede usar para acceder a los recursos protegidos en el sitio web.\nomeqref {1.0}
+		\nompageref{6}
+
+ \nomgroup{P}
+
+  \item [{\textbf{Proof of Stake (POS)}}]\begingroup La prueba de participación es un protocolo utilizado en blockchain que permite a los usuarios validar transacciones manteniendo una cierta cantidad de criptomonedas. Este protocolo permite a los usuarios obtener recompensas por tener criptomonedas, lo que ayuda a mantener la red en pie. Fue creado para reemplazar al conocido Proof of Work, aportando una mejor seguridad y escalabilidad a las redes que lo implementen.\nomeqref {1.0}
+		\nompageref{4}
+  \item [{\textbf{Proof of Work (POW)}}]\begingroup La prueba de trabajo es un mecanismo de consenso descentralizado que requiere que los miembros de la red se esfuercen en resolver un número hexadecimal encriptado. La prueba de trabajo también se denomina minería, en referencia a recibir una recompensa por el trabajo realizado.\nomeqref {1.0}
+		\nompageref{4}
+
+ \nomgroup{S}
+
+  \item [{\textbf{Software Developer Kit (SDK)}}]\begingroup Un kit de desarrollador de software es una colección de herramientas y recursos que ayudan a los desarrolladores de software a crear, probar e implementar software. Los SDK pueden incluir desde muestras de código hasta herramientas de desarrollo.\nomeqref {0}
+		\nompageref{2}
+  \item [{Certificate's \textbf{serial number}}]\begingroup El número de serie de un certificado x509 es un identificador único para el certificado, emitido por su Autoridad certificadora.\nomeqref {2.0}
+		\nompageref{26}
+
  \nomgroup{W}
 
   \item [{\textbf{Web of Science Core Collection (WOS)}}]\begingroup Base de datos de citas l\'ider en el mundo. Contiene registros de art\'iculos de las revistas de mayor impacto, incluidas publicaciones libres, actas de congresos y libros.\nomeqref {0}
 		\nompageref{1}
+
+ \nomgroup{X}
+
+  \item [{\textbf{X509 Certificate}}]\begingroup En criptografía, X.509 es un estándar de la Unión Internacional de Telecomunicaciones (ITU) que define el formato de los certificados de clave pública. Es un certificado digital que se utiliza para verificar la identidad de una persona, organización o máquina o para proteger las comunicaciones entre dos partes.\nomeqref {2.0}
+		\nompageref{28}
 
 \end{thenomenclature}

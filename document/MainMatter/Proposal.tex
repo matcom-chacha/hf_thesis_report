@@ -244,6 +244,10 @@ A diferencia de SDKs como el de Java, el m\'odulo \texttt{FabricCAClient} propue
 Por ejemplo, para revocar un certificado de inscripción se debe especificar su \emph{AKI} (del ingl\'es Authority Key Identifier) y número de serie. Estos valores no son m\'as que la forma mediante la cual se puede identificar un\'ivocamente un certificado asociado a una CA. En cambio, para revocar una identidad no se requiere m\'as que el ID con que fue registrada.
 %aki It contains a key identifier which is derived from the public key in the issuer certificate.
 
+\nomenclature[aki]{\textbf{AKI}}{El aki de un certificado x509 es el identificador único del certificado. Contiene un identificador de clave que se deriva de la clave pública en el certificado del emisor.}
+
+\nomenclature[serialnumber]{Certificate's \textbf{serial number}}{El número de serie de un certificado x509 es un identificador único para el certificado, emitido por su Autoridad certificadora.}
+
 %The serial number is a unique number issued by the certificate issuer, which is also called the Certificate Authority (CA).
 
 \begin{lstlisting}[caption={M\'etodo \texttt{Revoke} de la clase \texttt{CAService}.}, label={code:revCaService}]
@@ -310,6 +314,8 @@ Por \'ultimo debe comentarse que, para una invocaci\'on efectiva, existen requer
 
 \subsection{CryptoSuite}\label{subchapter:cryptoEp}
 %REFORMULAR< COMENTAR UN POCO MAS Q HACE CADA METODO Y ESPECIFICAR LOS PARAMETROS QUE SE UTILIZAN PARA ELLO
+
+\nomenclature[x509c]{\textbf{X509 Certificate}}{En criptografía, X.509 es un estándar de la Unión Internacional de Telecomunicaciones (ITU) que define el formato de los certificados de clave pública. Es un certificado digital que se utiliza para verificar la identidad de una persona, organización o máquina o para proteger las comunicaciones entre dos partes.}
 
 Con anterioridad se mencion\'o la necesidad de contar con un mecanismo para cubrir las necesidades de una PKI en cuanto a creaci\'on de llaves, firmas digitales y cifrado con pares de claves asimétricas. El m\'odulo \emph{FabricCAClient}, propuesto expone la interfaz \texttt{ICryptoSuite} (ver ejemplo \ref{code:icryptos}), la cual encapsula los m\'etodos principales que una clase debe implementar para cubrir estos requerimientos b\'asicos. 
 
