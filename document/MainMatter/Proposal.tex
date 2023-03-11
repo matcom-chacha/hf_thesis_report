@@ -32,6 +32,7 @@ Teniendo esto en cuenta, el procedimiento que se suele efectuar resulta un poco 
 
 Este proceso preserva tanto la integridad de la autoridad certificadora, dado que solo los administradores de la CA podr\'an registrar usuarios y asignar roles y afiliaciones; como la de las claves privadas, ya que se limita el acceso hacia estas al usuario de la identidad correspondiente.
 
+
 \begin{lstlisting}[caption={M\'etodo \texttt{Register} de la clase \texttt{CAService}.}, label={code:registerServ}]
 public async Task<string> Register(string enrollmentId, string enrollmentSecret, int maxEnrollments, Tuple<string, string, bool>[] attrs, Enrollment registrar, string role = "", string affiliatiton = "") {
 	if (string.IsNullOrEmpty(enrollmentId))
