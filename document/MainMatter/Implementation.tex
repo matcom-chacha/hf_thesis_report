@@ -64,7 +64,7 @@ public void PutTest() {
 
 Importante tambi\'en fue el realizar pruebas de integraci\'on (\emph{Integration Tests}) para evaluar los componentes de la aplicación en un nivel más amplio. Estas se enfocan en verificar que los elementos dispersos del SDK funcionen en conjunto para producir el resultado esperado.
 
-Por ejemplo, continando con el \texttt{Wallet}, resulta evidente la necesidad de comprobar que, tras cargar una identidad previamente guardada, sus valores originales no se vean corrompidos ni se afecte el flujo de ejecuci\'on. En el fragmento de c\'odigo \ref{code:walletFlow} se almacena en la billetera la identidad de un admin, se recupera y se realizan una serie de operaciones bajo su comando (d\'igase el registrar un nuevo usuario, inscribirlo y revocarle luego sus permisos).
+Por ejemplo, continuando con el \texttt{Wallet}, resulta evidente la necesidad de comprobar que, tras cargar una identidad previamente guardada, sus valores originales no se vean corrompidos ni se afecte el flujo de ejecuci\'on. En el fragmento de c\'odigo \ref{code:walletFlow} se almacena en la billetera la identidad de un admin, se recupera y se realizan una serie de operaciones bajo su comando (d\'igase el registrar un nuevo usuario, inscribirlo y revocarle luego sus permisos).
 
 \begin{lstlisting}[caption={Test para verificar el comporamiento de un flujo completo utilizando identidades de una billetera.}, label={code:walletFlow}]
 [TestMethod()]

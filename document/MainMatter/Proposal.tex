@@ -20,7 +20,7 @@ El punto de acceso al SDK lo constituye el CAService. Una aplicaci\'on que desee
 
 A su vez, cada CAService contiene una instancia de CAClient. Ambas clases, estrechamente relacionadas, contienen m\'etodos para las funciones de \emph{register}, \emph{enroll}, \emph{reenroll} y \emph{revoke}. Su diferencia radica en que la primera recibe las invocaciones directas de la aplicaci\'on para redirigirlas a la segunda, encargada de enviar los llamados HTTP al servidor de Fabric CA. Finalmente, tras obtener la respuesta de la identidad autenticadora, se completa el mismo flujo hacia atr\'as, siendo el CAClient el que recibe el mensaje del servidor y el CAService el que lo transmite al cliente con el formato esperado.
 
-En el dise\~no de la aplicaci\'on se consider\'o esta organizaci\'on para abstraer al CAClient de las tareas de creaci\'on de llaves y csr, los cu\'ales se realizan en el CAService. A su vez, se consider\'o importante separar lo referente a la comunicaci\'on directa con el usuario en un lado y el intercambio con la CA en otro.
+En el dise\~no de la aplicaci\'on se consider\'o esta organizaci\'on para abstraer al CAClient de las tareas de creaci\'on de llaves y CSR, los cu\'ales se realizan en el CAService. A su vez, se consider\'o importante separar lo referente a la comunicaci\'on directa con el usuario en un lado y el intercambio con la CA en otro.
 
 Desglocemos el funcionamiento de los m\'etodos principales de ambas clases:
 
@@ -28,7 +28,7 @@ Desglocemos el funcionamiento de los m\'etodos principales de ambas clases:
 Si bien es posible para el administrador de una CA crear una identidad y proporcionar el par de claves pública/privada a un usuario fuera de banda, un proceso como este develar\'ia al admin la clave privada de cada usuario. Tal arreglo viola los procedimientos básicos de seguridad relativos a las claves privadas, las cuales no deben ser expuestas bajo ningún concepto.
 
 %y le asigna una función y los atributos requeridos
-Teniendo esto en cuenta, el procedimiento que se suele efectuar consiste resulta un poco diferente. En un primer paso los administradores de la CA registran a los usuarios, al asignar un ID y un secreto de inscripción a una identidad (similares a un nombre de usuario y contraseña). En un segundo momento, el admin le proporciona este ID y clave secreta al usuario de la identidad. Finalmente, el usuario puede ejecutar un comando de inscripción utilizando estos valores, en funci\'on de solicitar el par de claves pública/privada, su rol correspondiente, as\'i como otros atributos que pueden haberle sido asignados por el administrador de la CA.
+Teniendo esto en cuenta, el procedimiento que se suele efectuar resulta un poco diferente. En un primer paso los administradores de la CA registran a los usuarios, al asignar un ID y un secreto de inscripción a una identidad (similares a un nombre de usuario y contraseña). En un segundo momento, el admin le proporciona este ID y clave secreta al usuario de la identidad. Finalmente, el usuario puede ejecutar un comando de inscripción utilizando estos valores, en funci\'on de solicitar el par de claves pública/privada, su rol correspondiente, as\'i como otros atributos que pueden haberle sido asignados por el administrador de la CA.
 
 Este proceso preserva tanto la integridad de la autoridad certificadora, dado que solo los administradores de la CA podr\'an registrar usuarios y asignar roles y afiliaciones; como la de las claves privadas, ya que se limita el acceso hacia estas al usuario de la identidad correspondiente.
 
@@ -169,15 +169,15 @@ result["ServerInfo"]["CAChain"]?.Value<string>()??""));
 
 Obs\'ervese como ocurre lo mismo con la redirecci\'on del m\'etodo del \texttt{CAService} al \texttt{Enroll} de \texttt{CAClient}, pero en esta ocasi\'on adem\'as se solicita la creaci\'on de un par de llaves p\'ublicas y privadas en primera instancia.
 
-El usuario es libre de especificar un valor para el csr, que funciona como una petici\'on de certificado a enviar a la CA. De no ser provisto el SDK debe debe generar una llave privada para la identidad y crear un csr a partir de esta, de forma que el llamado HTTP a la servidor de la CA siempre contenga este par\'ametro.
+El usuario es libre de especificar un valor para el CSR, que funciona como una petici\'on de certificado a enviar a la CA. De no ser provisto el SDK debe debe generar una llave privada para la identidad y crear un CSR a partir de esta, de forma que el llamado HTTP a la servidor de la CA siempre contenga este par\'ametro.
 %; esto es lo que asegura el primer nivel del m\'etodo solicitado.
-% puede ser prudente dejar aqui una referencia a la ampliacion de lo referente a csr en proximos epigrafes
+% puede ser prudente dejar aqui una referencia a la ampliacion de lo referente a CSR en proximos epigrafes
 
 Los usuarios tienen la posibilidad de solicitar dos tipos de certificados de inscripción: uno para la firma de datos, otro para el cifrado. El par\'amtero \texttt{profile} de la figura facilita al cliente el especificar un valor \emph{tls} si desea un certificado TLS; de lo contrario se solicita un \emph{enrollment certificate} por defecto. Los certificados TLS pueden ser utilizados luego para implementar chaincodes e invocar transacciones. Lo recomendable es hacer uso de un certificado diferente para cada operaci\'on en aras de garantizar la privacidad, a pesar de que un mismo certificado tendr\'a validez en m\'ultiples ocasiones.
 
 %Las claves públicas que se incrustarán en los certificados deben ser del tipo ECDSA, por lo que el usuario convierte la clave para el cifrado de datos para utilizarla en forma de ECIES (Sistema de cifrado integrado de curva elíptica).
 
-Para atender la solicitud de una serie de atributos por a\~nadir al certificado esperado, el SDK espera recibir un \texttt{Dictionary} de \texttt{string} a \texttt{bool}, nombrado \texttt{attrRqs} (convertido luego a \texttt{attr\_reqs} en el \texttt{JObject}). Cada par llave-valor debe referenciar el nombre del atributo que se solicita y si es indispensable su presencia en el certificado final. De marcarse una tributo con \texttt{true}, si la CA no es capaz de encontrarlo lanzar\'a error ante la solicitud de inscripci\'on.
+Para atender la solicitud de una serie de atributos por a\~nadir al certificado esperado, el SDK espera recibir un \texttt{Dictionary} de \texttt{string} a \texttt{bool}, nombrado \texttt{attrRqs} (convertido luego a \texttt{attr\_reqs} en el \texttt{JObject}). Cada par llave-valor debe referenciar el nombre del atributo que se solicita y si es indispensable su presencia en el certificado final. De marcarse un atributo con \texttt{true}, si la CA no es capaz de encontrarlo lanzar\'a error ante la solicitud de inscripci\'on.
 
 Finalmente, ante una respuesta exitosa de la CA, el CAService retorna una instancia de la clase \texttt{Enrollment}. Este no es m\'as que la representaci\'on de una identidad inscrita a partir de propiedades como:
 \begin{enumerate}
@@ -188,17 +188,17 @@ Finalmente, ante una respuesta exitosa de la CA, el CAService retorna una instan
 	\item \texttt{CAChainCert}: cadena de certificados de la CA generadora del certificado de inscripci\'on de la identidad.
 \end{enumerate} 
 
-Debe aclararse que, de haberse invocado el m\'etodo \emph{Enroll} con un csr ya existente, el par de llaves p\'ublicas y privadas para esa entidad no ser\'an generados en el flujo interno del m\'etodo, con lo cual el \emph{PrivateKey} se devuelve en null para la instancia de la clase \texttt{Enrollment} resultante.
+Debe aclararse que, de haberse invocado el m\'etodo \emph{Enroll} con un CSR ya existente, el par de llaves p\'ublicas y privadas para esa entidad no ser\'an generados en el flujo interno del m\'etodo, con lo cual el \emph{PrivateKey} se devuelve en null para la instancia de la clase \texttt{Enrollment} resultante.
 
 \subsubsection{Reinscripci\'on}
 
 Para responder ante situaciones donde un certificado deba ser renovado, ya sea porque su fecha de caducidad se encuentra cercana o porque se haya visto comprometido, el SDK provee una implementaci\'on del m\'etodo \texttt{Reenroll}.
 
-En este caso, el \texttt{CAService} espera recibir un \texttt{Enrollment} en representaci\'on de la inscripci\'on previamente realizada. El procedimiento a seguir por esta funci\'on es muy similar al descrito anteriormente para el \texttt{Enroll}: generar el par de llaves criptogr\'aficas y el csr; realizar un llamado HTTP a la Fabric CA correspondiente; finalmente, devolver el nuevo certificado al usuario por medio de una instancia de \texttt{Enrollment}.
+En este caso, el \texttt{CAService} espera recibir un \texttt{Enrollment} en representaci\'on de la inscripci\'on previamente realizada. El procedimiento a seguir por esta funci\'on es muy similar al descrito anteriormente para el \texttt{Enroll}: generar el par de llaves criptogr\'aficas y el CSR; realizar un llamado HTTP a la Fabric CA correspondiente; finalmente, devolver el nuevo certificado al usuario por medio de una instancia de \texttt{Enrollment}.
 
 Las peque\~nas diferencias entre ambos procesos radican en que, para el caso del \texttt{Reenrollment} no se cuenta con el ID ni el secret de la entidad, por lo que deben realizarse dos pasos extras para que el flujo funcione de forma correcta.
 
-Primero, para acceder a un valor que represente el ID de la entidad en cuesti\'on se utiliza la clase \texttt{X509Certificate2}, presente en la biblioteca \texttt{System.Security.Cryptography} de \emph{.NET}. A partir de esta se pueden consultar valores de un certificado existente. En este caso se carga el \emph{Cert} por renovar y se consulta el valor de su \texttt{Subject}, a utilizar luego para la creaci\'on del csr.
+Primero, para acceder a un valor que represente el ID de la entidad en cuesti\'on se utiliza la clase \texttt{X509Certificate2}, presente en la biblioteca \texttt{System.Security.Cryp-} \texttt{tography} de \emph{.NET}. A partir de esta se pueden consultar valores de un certificado existente. En este caso se carga el \emph{Cert} por renovar y se consulta el valor de su \texttt{Subject}, a utilizar luego para la creaci\'on del CSR.
 
 %ante cada intercambio con
 Por otra parte, debe notarse c\'omo para acceder a las apis de Fabric se necesita un valor que identifique a la entidad solicitante, en funci\'on de que se valide su llamada. Para el caso del enroll se utiliza un token de autenticaci\'on conformado por el ID y la clave secreta. En cambio, para la reinscripci\'on, registro y revocaci\'on, se utiliza la funci\'on \texttt{PostAsync} del \texttt{CAClient}, que solicita un valor diferente a trav\'es del me\'todo mostrado en \ref{code:genAuthToken}. Se hace uso entonces de un nuevo token conformado por dos partes: un certificado de inscripción; una firma sobre el certificado y el cuerpo de la solicitud (ambas partes codificadas en base 64).
@@ -234,7 +234,7 @@ La firma mencionada durante la conformaci\'on del token es provista por el m\'et
 \subsubsection{Revocaci\'on}
 %https://hyperledger-fabric-ca.readthedocs.io/en/latest/users-guide.html#revoking-a-certificate-or-identity:~:text=Back%20to%20Top-,Fabric%20CA%20Client,-This%20section%20describes
 
-Antre un autoridad certificadora de Fabric existen dos tipos de revocaciones posibles: 
+Ante un autoridad certificadora de Fabric existen dos tipos de revocaciones posibles: 
 
 \begin{enumerate}
 	\item Revocaci\'on de un certificado espec\'ifico.
@@ -244,7 +244,7 @@ Antre un autoridad certificadora de Fabric existen dos tipos de revocaciones pos
 El segundo tipo requiere revocar tambi\'en todos los certificados asociados a dicha identidad y le proh\'ibe posteriores intentos de incripci\'on o registro.% de obtencion de certificados en general
 
 %responden a 
-A diferencia de SDKs como el de Java, el m\'odulo \texttt{FabricCAClient} propuesto, recibe estos dos llamados a trav\'es del mismo m\'etodo \texttt{Revoke} y, en funci\'on de los par\'ametros otorgados, delega la decisi\'on de qu\'e operaci\'on ha de realizarse a pasos posteriores. En realidad el servidor de Fabric tampoco realiza ninguna diferenciaci\'on; en la definici\'on de [\cite{hlfcaswagger}] se indica que ambas solicitudes responden a la URI “revoke”. Es luego la Fabric CA qui\'en se encarga de desambiguar el pedido, precisamente a partir de los parametros enviados.%aqui se podria discutir que el otro approach esta mas cercano al tipo de cosas que se hacen en csharp, pero por simplicidad este primer acercamiento se dejo asi
+A diferencia de SDKs como el de Java, el m\'odulo \texttt{FabricCAClient} propuesto, recibe estos dos llamados a trav\'es del mismo m\'etodo \texttt{Revoke} y, en funci\'on de los par\'ametros otorgados, delega la decisi\'on de qu\'e operaci\'on ha de realizarse en pasos posteriores. En realidad el servidor de Fabric tampoco realiza ninguna diferenciaci\'on; en la definici\'on de [\cite{hlfcaswagger}] se indica que ambas solicitudes responden a la URI “revoke”. Es luego la Fabric CA qui\'en se encarga de desambiguar el pedido, precisamente a partir de los parametros enviados.%aqui se podria discutir que el otro approach esta mas cercano al tipo de cosas que se hacen en csharp, pero por simplicidad este primer acercamiento se dejo asi
 
 Por ejemplo, para revocar un certificado de inscripción se debe especificar su \emph{AKI} (del ingl\'es Authority Key Identifier) y número de serie. Estos valores no son m\'as que la forma mediante la cual se puede identificar un\'ivocamente un certificado asociado a una CA. En cambio, para revocar una identidad no se requiere m\'as que el ID con que fue registrada.
 %aki It contains a key identifier which is derived from the public key in the issuer certificate.
@@ -361,7 +361,7 @@ Actualmente HLF utiliza llaves del tipo ECDSA (\emph{Elliptic Curve Digital Sign
 % 3) What is the curve? Consideration must be given by the CA to the strength of the security provided by each of these choices.  Security is measured in bits, where a strong symmetric cipher with a key of X bits is said to provide X bits of security.  It is recommended that the bits of security provided by each choice are roughly equivalent. 
 
 \subsubsection{M\'etodo GenCSR}
-En ep\'igrafes anteriores se hizo referencia a la necesidad de un CSR o solicitud de certificación a la hora de realizar las operaciones de inscripci\'on. Este conssite en un mensaje enviado por un solicitante a una autoridad de certificación como petici\'on de un certificado de identidad digital. Por lo general, contiene la clave pública para la cual se debe emitir el certificado, información de identificación (como un nombre de dominio, o de la identidad para quien que solicita) y una prueba de autenticidad (por ejemplo, una firma digital). El formato más común para las CSR es la especificación PKCS \#10, el empleado por Fabric.
+En ep\'igrafes anteriores se hizo referencia a la necesidad de un CSR o solicitud de certificación a la hora de realizar las operaciones de inscripci\'on. Este consiste en un mensaje enviado por un solicitante a una autoridad de certificación como petici\'on de un certificado de identidad digital. Por lo general, contiene la clave pública para la cual se debe emitir el certificado, información de identificación (como un nombre de dominio, o de la identidad para quien se solicita) y una prueba de autenticidad (por ejemplo, una firma digital). El formato más común para las CSR es la especificación PKCS \#10, el empleado por Fabric.
 
 En este caso el m\'etodo genera una solicitud de firma de certificado (CSR) de acuerdo con el par de claves provistas y el identificador dado. Para ello crea un objecto \texttt{Pkcs10CertificationRequest} ampar\'andose de: un \texttt{ISignatureFactory}, que tiene en cuenta el algoritmo de firma y la llave privada recibida; y una serie de atributos con información para identificar al solicitante.
 
@@ -467,7 +467,7 @@ public class FSWalletStore : WalletStore {
 }
 \end{lstlisting}
 
-En la figura \ref{code:fswalletstore} se pueden apreciar algunos elementos de nuestra clase \texttt{FSWalletStore}. Esta implementa la interfaz \texttt{WalletStore} que, como se comentaba, expone los m\'etodos fundamentales que un wallet requiere. Utilizando las facilidades de C\# para interactuar con el sistema de archivos, fundamentalmente del \texttt{Namespace}
+En la figura \ref{code:fswalletstore} se pueden apreciar algunos elementos de nuestra clase \texttt{FSWallet-} \texttt{Store}. Esta implementa la interfaz \texttt{WalletStore} que, como se comentaba, expone los m\'etodos fundamentales que un wallet requiere. Utilizando las facilidades de C\# para interactuar con el sistema de archivos, fundamentalmente del \texttt{Namespace}
 \texttt{System.IO}, la clase \texttt{FSWalletStore} es capaz de crear directorios y archivos, as\'i como leer y guardar datos en estos. 
 
 N\'otese como la informaci\'on referente a una identidad se almacena como un json en un archivo con extensi\'on \emph{id}. La direcci\'on a utilizar para el registro debe ser provista por el usuario al momento de instanciar la clase.
@@ -478,7 +478,7 @@ Resulta indispendable dedicar un peque\~no espacio a las identidades referenciad
 
 En concreto, el m\'odulo \texttt{FabricNetwork} dispone de una interfaz \texttt{Identity} con los m\'etodos caracter\'isticos de un objeto de este tipo. Una entidad posee un certificado, su llave privada y un identificador del MSP de su organizaci\'on, elementos que se obtienen tras realizar una inscripci\'on con la CA.
 
-Usualmente en HLF se trabaja con dos tipos entidades, las \emph{X.509} y las \emph{HSM-X.509}. La segunda responde a un sistema de almacenamiento que hace uso de una fuente externa para generar y resguardar llaves criptogr\'aficas (\emph{Hadware Sequrity Module} o HSM). Aqu\'i las llaves privadas, por ejemplo, no ser\'ian una propiedad de la identidad y, poe consiguiente, necesitar\'ian registrar informaci\'on sobre como acceder al sistema que las conserva.
+Usualmente en HLF se trabaja con dos tipos entidades, las \emph{X.509} y las \emph{HSM-X.509}. La segunda responde a un sistema de almacenamiento que hace uso de una fuente externa para generar y resguardar llaves criptogr\'aficas (\emph{Hadware Sequrity Module} o HSM). Aqu\'i las llaves privadas, por ejemplo, no ser\'ian una propiedad de la identidad y, por consiguiente, necesitar\'ian registrar informaci\'on sobre como acceder al sistema que las conserva.
 
 Para el alcance de este trabajo, como un acercamiento inicial, la primera opci\'on cumple con los requerimientos necesarios, por lo que esta fue la que se decidi\'o implementar. En la clase \texttt{X509Identity} se pueden apreciar las caracter\'isticas y funcionalidades b\'asicas de una identidad.
 

@@ -10,6 +10,11 @@
   \item [{\textbf{LDAP}}]\begingroup LDAP es un servicio de directorio que permite que los sistemas compartan información de usuarios y grupos. LDAP se puede utilizar para autenticar usuarios y administrar cuentas y grupos de usuarios.\nomeqref {1.0}
 		\nompageref{6}
 
+ \nomgroup{N}
+
+  \item [{\textbf{Node OUs}}]\begingroup Las unidades organizativas de nodo son una forma de agrupar nodos en un HLF. Se utilizan para administrar el ciclo de vida de los nodos, incluido el inicio, la detención y la administración del estado de los nodos. Las identidades pueden usar estos NodeUS para clasificarse como cliente, administrador, par o ordenante. Las cuatro clasificaciones son mutuamente excluyentes.\nomeqref {1.0}
+		\nompageref{12}
+
  \nomgroup{O}
 
   \item [{\textbf{OpenID Connect}}]\begingroup Protocolo para autenticar usuarios y emitir tokens. Permite que dos partes, como un sitio web y un usuario, intercambien información de forma segura. Cuando un usuario inicia sesión en un sitio web, OpenID Connect puede verificar que el usuario es quien dice ser y emitir un token que se puede usar para acceder a los recursos protegidos en el sitio web.\nomeqref {1.0}

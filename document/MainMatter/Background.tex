@@ -44,7 +44,7 @@ Entre las ventajas de esta tecnolog\'ia es posible destacar:
 
 \section{Nociones B\'asicas de Hyperledger Fabric}
 
-Hyperledger Fabric (HLF) es un proyecto de c\'odigo libre del consorcio Hyperledger, creado su vez por la \emph{Linux Foundation} [\cite{linuxfoundation}] con el objetivo de impulsar el desarrollo de tecnolog\'ias blockchain. Consiste en una DLT dise\~nada espec\'ificamente para entornos empresariales, atendiendo a las necesidades de identificar a los participantes en la red, establecer una serie de permisos para la interacci\'on, contar con privacidad y confidencialidad de transacciones, baja latencia en la confirmaci\'on de estas y capacidad para enviar una cantidad elevada de datos por unidad de tiempo (\emph{throughput}).
+Hyperledger Fabric (HLF) es un proyecto de c\'odigo libre del consorcio Hyperledger, creado a su vez por la \emph{Linux Foundation} [\cite{linuxfoundation}] con el objetivo de impulsar el desarrollo de tecnolog\'ias blockchain. Consiste en una DLT dise\~nada espec\'ificamente para entornos empresariales, atendiendo a las necesidades de identificar a los participantes en la red, establecer una serie de permisos para la interacci\'on, contar con privacidad y confidencialidad de transacciones, baja latencia en la confirmaci\'on de estas y capacidad para enviar una cantidad elevada de datos por unidad de tiempo (\emph{throughput}).
 
 HLF surge entonces como plataforma privada y permisionada. A diferencia de los sistemas abiertos en los que cualquier desconocido puede consultar y modificar los datos, Fabric utiliza un Proveedor de Servicios de Membres\'ia (MSP) para poder identificar a cada usuario que se una a la red. As\'i, limita la interacci\'on para s\'olo un n\'umero de elementos autorizados y establece facilidades para otorgar permisos espec\'ificos a cada uno. Ofrece adem\'as una caracter\'istica muy novedosa y \'util, d\'igase la utilizaci\'on de canales como especie de subredes para compartir informaci\'on confidencial entre pares o grupos de miembros que lo requieran.
 
@@ -57,7 +57,7 @@ De igual forma cuenta con protocolos enchufables de gesti\'on de identidad como 
 
 \nomenclature[oidc]{\textbf{OpenID Connect}}{Protocolo para autenticar usuarios y emitir tokens. Permite que dos partes, como un sitio web y un usuario, intercambien información de forma segura. Cuando un usuario inicia sesión en un sitio web, OpenID Connect puede verificar que el usuario es quien dice ser y emitir un token que se puede usar para acceder a los recursos protegidos en el sitio web.}
 
-Adem\'as, al utilizar mecanismos de consenso deterministas no requiere del uso de criptomonedas\footnote{aunque podr\'ian ser implementadas en el caso deseado} para incentivar el minado. Lo anterior podr\'ia considerarse como una medida de seguridad adicional, pues evita atraer atacantes que quieran socavar la estabilidad de la red. Adem\'as implica un costo operacional menos elevado de la plataforma.
+Adem\'as cabe destacar que, a diferencia de otras blockchains, HLF no requiere del uso de criptomonedas\footnote{aunque podr\'ian ser implementadas en el caso deseado} para incentivar el minado. Lo anterior podr\'ia considerarse como una medida de seguridad adicional, pues evita atraer atacantes que quieran socavar la estabilidad de la red. Adem\'as implica un costo operacional menos elevado de la plataforma.
 
 \subsection{Componentes principales}
 
@@ -207,14 +207,14 @@ Para cada red de HLF se recomienda el despliegue de dos autoridades certificador
 
 Por lo general se aconseja tambi\'en separar al servicio de ordenamiento en una organizaci\'on diferente a las de los nodos pares con su propia CA. En caso de existir nodos ordenadores agrupados por organizaciones, ha de garantizarse una CA propia para cada una.
 
-Toda esta separaci\'on de funcionalidades permite distribuir las gestiones lo m\'as posible, lo cual reduce las posibilidades que tendr\'ia un atacante ante la red y resulta indispensable en general para minimizar las vulnerabilidades la blockchain.
+Toda esta separaci\'on de funcionalidades permite distribuir las gestiones lo m\'as posible, lo cual reduce las posibilidades que tendr\'ia un atacante ante la red y resulta indispensable en general para minimizar las vulnerabilidades de la blockchain.
 
 %garantizando que el material criptogr\'afico que proveen estas autoridades sea de total confianza.
 
 \subsection{MSP}
 Mientras las autoridades certificadoras generan identidades a partir de un par de llaves p\'ublicas y privadas, es necesario un mecanismo para reconocer dichas entidades en la red. Aqu\'i es donde aparece en escena el concepto de Provedoores de Servicios de Membres\'ia o MSP del ingl\'es \emph{Membership Service Providers}.
 
-Los MSP son componentes de HLF que definen las reglas que rigen a las entidades v\'alidas para una organizaci\'on espec\'ifica. Permiten convertir identidades en roles; son qui\'enes determinan qu\'e permisos tiene cada entidad a nivel de organizaci\'on, nodo y canal; y definen las organizaciones (inclu\'idas Cas) en las que conf\'ian los miembros de una red. Por ello, se consideran encargados de validar las acciones realizadas por cada entidad, velando siempre porque cada una realice solo aquellas a las que se le ha dado acceso.
+Los MSP son componentes de HLF que definen las reglas que rigen a las entidades v\'alidas para una organizaci\'on espec\'ifica. Permiten convertir identidades en roles; son qui\'enes determinan qu\'e permisos tiene cada entidad a nivel de organizaci\'on, nodo y canal; y definen las organizaciones (inclu\'idas CAs) en las que conf\'ian los miembros de una red. Por ello, se consideran encargados de validar las acciones realizadas por cada entidad, velando siempre porque cada una realice solo aquellas a las que se le ha dado acceso.
 
 A diferencia de lo que su nombre puediera indicar, un MSP no provee nada. Su implementaci\'on concreta consiste en una serie de carpetas que se a\~naden a la configuraci\'on de la red y permite definir a cada organizaci\'on tando a nivel interno (declarando por ejemplo a sus administradores) como externo (permitiendo que otras organizaciones validen que las entidades posean la autoridad para realizar las acciones que solicitan).
 
@@ -225,11 +225,11 @@ Una carpeta MSP local est\'a compuesta por:
 \begin{enumerate}
 	\item Un archivo \emph{config.yaml} utilizado para configurar la clasificaci\'on de identidades en Fabric al habilitar el \emph{Node OUs} y definir los roles aceptables.
 	
-	%\nomenclature[nodeou]{\textbf{Node OUs}}}Las unidades organizativas de nodo son una forma de agrupar nodos en un tejido. Se utilizan para administrar el ciclo de vida de los nodos, incluido el inicio, la detención y la administración del estado de los nodos.}
+	\nomenclature[nodeou]{\textbf{Node OUs}}{Las unidades organizativas de nodo son una forma de agrupar nodos en un HLF. Se utilizan para administrar el ciclo de vida de los nodos, incluido el inicio, la detención y la administración del estado de los nodos. Las identidades pueden usar estos NodeUS para clasificarse como cliente, administrador, par o ordenante. Las cuatro clasificaciones son mutuamente excluyentes.}
 	
 	\item Una carpeta \emph{cacerts} con una lista de certificados autofirmados X.509 de las CAs ra\'iz en las que conf\'ia la organizaci\'on a la que representa el MSP.
 	
-	\item Una carpeta \emph{intermediatecerts} con certificados X.509 de las CAs intermedias en las que conf\'ia la organizaci\'on. Cada certificado debe estar firmado por un Ca de la carpeta de ra\'ices confiables o bien otro intermediario cuya cadena termine en el mismo sitio. Ambas carpetas definen las CAs de las que deben provenir los certificados para considerarse miembros de la organizaci\'on, aunque a diferencia de la primera, la de intermediarios puede estar vac\'ia.
+	\item Una carpeta \emph{intermediatecerts} con certificados X.509 de las CAs intermedias en las que conf\'ia la organizaci\'on. Cada certificado debe estar firmado por un CA de la carpeta de ra\'ices confiables o bien otro intermediario cuya cadena termine en el mismo sitio. Ambas carpetas definen las CAs de las que deben provenir los certificados para considerarse miembros de la organizaci\'on, aunque a diferencia de la primera, la de intermediarios puede estar vac\'ia.
 	
 	\item Una carpeta de \emph{admincerts} que lista las identidades que definen actores con el rol de administradores en la organizaci\'on. En versiones posteriores a la 1.4.3 no existe; en cambio, se definen los administradores en el momento de creaci\'on de la entidad, cuando la CA determina el valor de la propiedad \emph{Node OU rol} del certificado.
 	
@@ -252,9 +252,9 @@ Las aplicaciones que deseen interactuar con el ledger han de hacerlo por medio d
 
 Hyperledger Fabric ofrece un n\'umero de SDKs para el desarrollo de aplicaciones en una amplia variedad de lenguajes de programaci\'on. Actualmente cuenta con soporte para Node.js [\cite{sdknode}] y Java [\cite{sdkjava}], los primeros en aparecer. Igualmente, a pesar de no estar tan desarrolladas como las primeras, ofrece versiones para Go [\cite{sdkgo}] y Python [\cite{sdkpython}].
 
-Vale aclarar que estos paquetes son considerados SDKs de bajo nivel. Contienen una considerable cantidad de c\'odigo y, por tanto, una complejidad bastante elevada. Queda en manos programador con la intenci\'on de conectar una aplicaci\'on con Fabric, comprender el funcionamiento de las solicitudes de transacciones y el endosamiento para implementarlos a partir de estas plataformas, dado que en realidad lo que contienen no es m\'as que una adaptaci\'on de las llamadas gRPC [\cite{grpc}] para cada lenguaje espec\'ifico.
+Vale aclarar que estos paquetes son considerados SDKs de bajo nivel. Contienen una considerable cantidad de c\'odigo y, por tanto, una complejidad bastante elevada. Queda en manos del programador con la intenci\'on de conectar una aplicaci\'on con Fabric, comprender el funcionamiento de las solicitudes de transacciones y el endosamiento para implementarlos a partir de estas plataformas, dado que en realidad lo que contienen no es m\'as que una adaptaci\'on de las llamadas gRPC [\cite{grpc}] para cada lenguaje espec\'ifico.
 
-Para resolver estos problemas se han creado APIs de alto nivel que le permiten a los desarrolladores abstraerse un poco m\'as del funcionamiento de HLF en sus or\'igenes. As\'i, con proyectos como [\cite{fabricgateway}] y [\cite{fabricgatewayjava}] se facilita la realizaci\'on de consultas, ejecuci\'on de transacciones y respuesta a eventos que permitan conocer y modificar el estado del ledger.
+Para resolver estos problemas se han creado APIs de alto nivel que le permiten a los desarrolladores abstraerse un poco m\'as del funcionamiento de HLF en sus or\'igenes. As\'i, con proyectos como los \emph{Fabric Gateways} [\cite{fabricgateway}] y [\cite{fabricgatewayjava}] se facilita la realizaci\'on de consultas, ejecuci\'on de transacciones y respuesta a eventos que permitan conocer y modificar el estado del ledger.
 
 El surgimiento de estos \'ultimos modelos m\'as consistentes, supresores de mucho c\'odigo repetitivo propenso a errores, ha sido bien recibido por la comunidad. No obstante, su funcionamiento cuenta en las bases con los SDKs mencionados al inicio, siendo de hecho construidos encima de estos. Adem\'as carecen de un mecanismo para gestionar tareas de administraci\'on. Por ello, a\'un se hace necesario intercambiar directamente con los SDKs de bajo nivel para la creaci\'on de identidades, su registro entre otras operaciones de relevancia.
 
@@ -262,7 +262,7 @@ Dado que el objetivo del presente trabajo gira en torno a estas funcionales, son
 
 \subsection{Caracter\'isticas de los Fabric SDKs}
 
-En general los 4 repos de Fabric SDK existentes siguen las especificaciones de [\cite{fabricsdkspec}], brindando las primitivas para acceder a las funcionalidades b\'asicas de la red desde una capa de abstracci\'on que aligera la carga del usuario. Permiten a los desarrolladores interactuar con la blockchain para desplegar e invocar chaincode, escuchar eventos que se puedan generar y recuperar informaci\'on acerca los bloques y transacciones salvaguardados en el ledger. 
+En general los 4 repos de Fabric SDK existentes siguen las especificaciones de [\cite{fabricsdkspec}], brindando las primitivas para acceder a las funcionalidades b\'asicas de la red desde una capa de abstracci\'on que aligera la carga del usuario. Permiten a los desarrolladores interactuar con la blockchain para desplegar e invocar chaincode, escuchar eventos que se puedan generar y recuperar informaci\'on acerca de los bloques y transacciones salvaguardados en el ledger. 
 
 %following paragraph should be supported with examples
 El SDK de Go resulta un poco diferente al resto en cuanto a estilo e implementaci\'on; posee un mayor nivel de abstracci\'on que le facilita al programador el proceso de acoplamiento con la plataforma. Los de Java y Node disponen de una capa extra que separa las funciones para el desarrollo de aplicaciones de las administrativas. As\'i, aunque cada uno le aporta las caracter\'isticas propias del lenguaje en particular y le adiciona las modificaciones consideradas prudentes, todos se ajustan a la misma idea central.
@@ -282,11 +282,11 @@ Tomemos como ejemplo el de Node.js para un an\'alisis a mayor profundidad. Este 
 %[esto puede ponerse aqui o pasarlo a la parte de propuesta]
 %Escribir aqui un poquito de las notas que hay en la libreta sobre que hace cada repo
 
-El m\'odulo \texttt{fabric-ca-client}, el de mayor inter\'es para este proyecto, es el que provee las capacidades para interactuar con la Fabric CA para el manejo de entidades.  Permite registrar usuarios, inscribirlos para obtener el certificado correspondiente firmado por la Ca,  revocar certificados, revocar usuarios seg\'un su \emph{enrollmentId} o n\'umero identificador de inscripci\'on, entre otros.
+El m\'odulo \texttt{fabric-ca-client}, el de mayor inter\'es para este proyecto, es el que provee las capacidades para interactuar con la Fabric CA para el manejo de entidades.  Permite registrar usuarios, inscribirlos para obtener el certificado correspondiente firmado por la CA,  revocar certificados, revocar usuarios seg\'un su \emph{enrollmentId} o n\'umero identificador de inscripci\'on, entre otros.
 
 Para poder acceder a estas funcionalidades la biblioteca cuenta con la clase 
 \\
-\texttt{ FabricCAServices} que debe ser instanciada como punto de entrada. Esta, poseedora a su vez de una clase \texttt{FabricCAClient}, expone los m\'etodos para gesti\'on de certificados y entidades plasmados en la segunda. Posee adem\'as una implementaci\'on de la interfaz \texttt{CryptoSuite}, requerida por cada SDK, que encapsula los algoritmos para firmas digitales, encriptaci\'on y hashing seguro. En este caso el repo de node ofrece implementaciones para ECDSA y SHA2/3, aunque admite que se utilicen otras alternativas si son especificadas en las configuraciones de la CrytoSuite.
+\texttt{ FabricCAServices} que debe ser instanciada como punto de entrada. Esta, poseedora a su vez de una clase \texttt{FabricCAClient}, expone los m\'etodos para gesti\'on de certificados y entidades plasmados en la segunda. Posee adem\'as una implementaci\'on de la interfaz \texttt{CryptoSuite}, requerida por cada SDK, que encapsula los algoritmos para firmas digitales, encriptaci\'on y hashing seguro. En este caso el repo de Node.js ofrece implementaciones para ECDSA y SHA2/3, aunque admite que se utilicen otras alternativas si son especificadas en las configuraciones de la CrytoSuite.
 
 %Comentar que JAVA es igual orientado a objetos lo que no cuenta con la clase FCAServices
 
