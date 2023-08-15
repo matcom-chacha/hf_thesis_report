@@ -1,15 +1,19 @@
 \begin{conclusions}
-    Conclusiones
-    \\
-    Deben corresponderse con los objetivos planteados.
-    • Elaborarse de forma precisa, breve y conveniente.
-    • Deben mostrar que son una consecuencia lógica del
-    trabajo realizado.
-    • Deben representar la esencia de los resultados obtenidos
-    por el autor, demostrada en el cuerpo de la tesis.
-    • Deben resumir las aportaciones fundamentales del
-    trabajo.
-    • Pueden señalarse otros aspectos como: dificultades
-    encontradas al realizar el trabajo, limitaciones del mismo,
-    etc
+ El presente trabajo proporciona los primeros acercamientos para el dise\~no e implementaci\'on de un SDK que facilite el intercambio entre una red de Hyperledger Fabric y una aplicaci\'on cualquiera en el lenguaje de programaci\'on C\#. 
+ 
+ Las ventajas de HLF como blockchain empresarial son innegables, por lo que resulta de inter\'es extender la lista de lenguajes a los que provee soporte.
+ 
+ El documento cuenta con una breve rese\~na de las caractr\'isticas generales de la blockchain HLF, resaltando las ventajas que podr\'ian ofrecerse al extender dicha lista. Igualmente se presentaron los mecanismos de autenticaci\'on y autorizaci\'on en esta plataforma, los cuales constituyen la base de las funcionalidades a implementar.
+
+ Para comprender el funcionamiento a replicar, fueron analizadas las bibliotecas \texttt{fabric-sdk} ya existentes para Python, Golang, Node.js y Java. Se evaluaron las estructuras y patrones utilizados, descartando algunos y conservando los m\'as adecuados para el lenguaje en cuesti\'on.
+ 
+ A partir de los estudios realizados, fue posible dise\~nar e implementar el m\'odulo \texttt{FabricCaClient} de un  \texttt{fabric-sdk-csharp}, para generar identidades criptogr\'aficas con C\#.
+ 
+ Para garantizar el soporte para las peticiones b\'asicas de registro, inscripci\'on, renovaci\'on y revocaci\'on de certificados fue necesario tambi\'en implementar funcionalidades para la creaci\'on de llaves criptogr\'aficas y generaci\'on de firmas digitales. estos aspectos fueron recogidos en la interfaz \emph{CryptoSuite} y la clase \emph{CryptoPrimitives}. 
+ 
+ Por \'ultimo, como forma de garantizar la persistencia de datos, se implement\'o un wallet o billetera que permita a las aplicaciones almacenar y acceder a información sobre identidades de usuarios.
+ 
+ El c\'odigo escrito fue objeto de pruebas, verificando que los resultados obtenidos se adecuaran al comportamiento esperado. Como resultado se arriv\'o a un un código robusto, flexible, libre de errores, capaz de satisfacer las
+ funcionalidades básicas para las que fue concebido.
+ 
 \end{conclusions}

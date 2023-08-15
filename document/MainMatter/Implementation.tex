@@ -1,56 +1,128 @@
-\chapter{Detalles de Implementación y Experimentos}\label{chapter:implementation}
+\chapter{Experimentaci\'on y resultados}\label{chapter:implementation}
+% nativo 
+Hasta aqu\'i se han expuesto los elementos fundamentales en la creaci\'on de un kit de desarrollo de software para C\# que cubra las funcionalidades b\'asicas para la comunicaci\'on con una CA de HLF. A continuaci\'on se presentan algunos de los experimentos llevados a cabo para probar su eficacia, a la vez que se indica la forma para interactuar con esta plataforma. Finalmente se comentan los resultados generales de este proyecto.
 
-•Metodología empleada
-•Resultados obtenidos y su análisis, 
-valoración e interpretación
+Para testear el funcionamiento del SDK implementado se llevaron a cabo numerosos experimentos contra un servidor de Fabric CA. Los m\'as relevantes fueron registrados en un proyecto separado dentro de la soluci\'on, nombrado \texttt{Test}. En este proyecto se recogieron una serie de pruebas unitarias (del ingl\'es \emph{Unit Tests} [\cite{unittestvs}]) sobre componentes aislados, desglosando la funcionalidad de cada clase en comportamientos discretos que fuera posible probar como unidades individuales.
 
-Por capítulos 
-y epígrafes(opcional)
+En la soluci\'on propuesta se agregan dos archivos de tests: \texttt{CAServiceTests}, que re\'une las pruebas relacionadas con la clase \texttt{CaService} y \texttt{CAClient}; y un \texttt{WalletTests}, que analiza todo lo referente a las billeteras. Aunque los nombres de los archivos de prueba pueden ser arbitrarios, en este caso se adopta una convención de nomenclatura que utiliza el nombre de la clase a probar con la terminaci\'on Test. Lo mismo para cada m\'etodo espec\'ifico, a\~nadiendo tambi\'en en los casos necesarios una mini descripci\'on del objetivo o el comportamiento esperado. Se espera este estándar facilite la comprensi\'on del c\'odigo para futuros desarrolladores del proyecto, y que sea utilizado para los nuevos aportes.
+% de la prueba especifica.
 
-•Síntesis de los resultados alcanzados en la
-revisión de la bibliografía relacionada con el
-tema.
-•Presentación organizada de los
-conocimientos científicos acumulados sobre
-el tema.
-•Presentación y análisis de investigaciones
-anteriores.
-•Presupuestos o antecedentes de que se
-parte.
-•Posición que asume el autor sobre el tema.
+La clase \texttt{CAServiceTests} contempla tests que chequean comportamientos como: 
 
-Metodología empleada
-•Marco conceptual
-•Tareas realizadas
-•Métodos empleados y tipos de 
-proyecto.
-•Análisis de los resultados obtenidos
+\begin{enumerate}
+	\item Que a trav\'es una llamada de registro fuera posible inscribir a un usuario.
+	
+	\item La negaci\'on del registro a una identidad tras haberle revocado sus permisos.
+	
+	\item Que al proveer un password o secret este fuera utilizado para el registro ante la CA [\ref{code:regsecret}].
+	
+	\begin{lstlisting}[caption={Test de la clase \texttt{CAServiceTests} para comprobar que el secret provisto se utilice en el registro.}, label={code:regsecret}]
+	[TestMethod()]
+	public async Task RegisterWithSecretProvidedTest() {
+	string userId = "appUser";
+	string usrpw = userId + "pw";
+	int maxEnrollment = 5;
+	
+	string secret = await caService.Register(userId, usrpw, maxEnrollment, null, adminEnr);
+	
+	Assert.AreEqual(secret, usrpw, "Registration call didn't set provided secret.");
+	}
+	\end{lstlisting}
+	
+	\item La posibilidad de reinscribir a un usuario con los datos previos.
+	
+	\item Que al proveer un csr el registro sea efectuado correctamente.
+	%que se registren los atributos provistos etc. 
+\end{enumerate}
 
-El proyecto de desarrollo tecnológico
-El sello distintivo de este tipo de proyecto es que se orienta hacia
-la obtención de productos tangibles: un medio diagnóstico, un
-dispositivo para la realización de biopsias, un software, un
-modelo para la predicción del rendimiento académico,
-maquetas, modelos experimentales.
-La obtención del producto se acompaña de la evaluación de
-sus propiedades.
-El proyecto de investigación
-El rasgo que tipifica al proyecto de investigación es la existencia de
-una intención cognoscitiva que prevalece sobre cualquier otro
-propósito en el proyecto. Conocer quiere decir arribar a
-proposiciones verdaderas o más completas sobre un objeto de
-estudio y/o generar, confirmar, refutar o verificar hipótesis en
-relación con dicho objeto.
-El QUÉ el POR QUÉ, el PARA QUÉ y el CÓMO figuran como
-componentes constantes en los textos en que se materializa todo
-proyecto.
+Por otro lado, la clase \texttt{WalletTests} se centra en comprobar que las operaciones caracterist\'icas de una billetera realmente modifiquen el sistema de archivos. Por ejemplo, el test \ref{code:walletput} intenta a\~nadir al wallet una identidad en representaci\'on de un admin ya inscrito, comprobando luego que el directorio contenga la informaci\'on al respecto.
 
-Selección de los métodos y técnicas
-Debe responder a:
-• Tipo de objetivos e hipótesis.
-• Naturaleza del objeto de estudio.
-•Ventajas y limitaciones de los métodos y 
-técnicas.
-• Características de la institución en que se 
-realiza la investigación.
-•Recursos materiales y humanos utilizados
+%aclarar que antes ya se habi creado el wallet
+\begin{lstlisting}[caption={Test para chequear el m\'etodo \texttt{Put} de la clase \texttt{Wallet}.}, label={code:walletput}]
+[TestMethod()]
+public void PutTest() {
+	FSWalletStore.ClearDirectory(storagePath);
+
+	var idenList = wallet.List();
+	Assert.AreEqual(idenList.Length, 0, "Initially a wallet should contain no values.");
+
+	// put element in wallet
+	X509Identity identity = new X509Identity(adminEnr.Cert, adminEnr.PrivateKey, orgMSP);
+	wallet.Put(registrarName, identity);
+
+	// check element was saved
+	var newIdenList = wallet.List();
+	Assert.AreEqual(newIdenList.Length, 1, "Wallet should contain just the element saved.");
+	Assert.AreEqual(newIdenList[0], registrarName, "Wallet content doesn't match the expected file.");
+
+	// clear wallet
+	wallet.Remove(registrarName);
+}
+\end{lstlisting}
+
+%[describir en el ejemplo El patrón AAA (Organizar, Actuar, Afirmar) es una forma común de escribir pruebas unitarias para un método bajo prueba.]
+
+Importante tambi\'en fue el realizar pruebas de integraci\'on (\emph{Integration Tests}) para evaluar los componentes de la aplicación en un nivel más amplio. Estas se enfocan en verificar que los elementos dispersos del SDK funcionen en conjunto para producir el resultado esperado.
+
+Por ejemplo, continuando con el \texttt{Wallet}, resulta evidente la necesidad de comprobar que, tras cargar una identidad previamente guardada, sus valores originales no se vean corrompidos ni se afecte el flujo de ejecuci\'on. En el fragmento de c\'odigo \ref{code:walletFlow} se almacena en la billetera la identidad de un admin, se recupera y se realizan una serie de operaciones bajo su comando (d\'igase el registrar un nuevo usuario, inscribirlo y revocarle luego sus permisos).
+
+\begin{lstlisting}[caption={Test para verificar el comporamiento de un flujo completo utilizando identidades de una billetera.}, label={code:walletFlow}]
+[TestMethod()]
+public async Task CaClientFlowWithWalletTest() {
+	string userId = "appUser1";
+	string userSecret = "xsw";
+	int maxEnrollment = 5;
+
+	FSWalletStore.ClearDirectory(storagePath);
+
+	X509Identity identity = new X509Identity(adminEnr.Cert, adminEnr.PrivateKey, orgMSP);
+	wallet.Put(registrarName, identity);
+
+	// retrieve identity
+	var adminIdentity = wallet.Get(registrarName);
+	Enrollment newAdminEnr = new Enrollment(adminIdentity.GetPrivateKey(), adminIdentity.GetCertificate(), null, caService);
+
+	// register user
+	string secret = await caService.Register(userId, userSecret, maxEnrollment, null, newAdminEnr);
+
+	// enroll user
+	Enrollment usrEnr = await caService.Enroll(userId, secret);
+
+	// revoke credentials
+	var result = await caService.Revoke(userId, "", "", "unspecified", true, newAdminEnr);
+
+	try {
+		// check user is unable to enroll after its credentials are revoked
+		Enrollment newUsrEnr = await caService.Enroll(userId, secret);
+		wallet.Remove(registrarName);
+	}
+	catch (EnrollmentException exc) {
+		StringAssert.Contains(exc.ToString(), unauthorizedMessage);
+		wallet.Remove(registrarName);
+		return;
+	}
+
+	Assert.Fail("Expected an enrollment denial.");
+}
+\end{lstlisting}
+
+N\'otese que todos estos tests resultan relevantes no s\'olo en el momento presente, sino tambi\'en para el posterior mantenimiento y extensi\'on del SDK. Se espera brinden seguridad al desarrollador en cuanto a que los cambios efectuados no interfieran en los viejos mecanismos ya establecidos.
+
+
+%Para ejecutar Test Explorer, la mayoría de los marcos requieren que agregue atributos específicos para identificar los métodos de prueba unitaria.
+
+
+%Estas pruebas más amplias se utilizan para probar la infraestructura de la aplicación y el marco completo, que a menudo incluyen los siguientes componentes:
+
+%Base de datos, sistema de archivos, Dispositivos de red, Tubería de solicitud-respuesta
+
+Debe aclararse que para este sistema bajo prueba (“SUT” seg\'un la terminolog\'ia utilizada por la documentaci\'on oficial) no se escribieron tests de integración para cada permutación de datos posibles. Solo se consideraron un conjunto de pruebas enfocadas en las funcionalidades b\'asicas del sdk y las rutinas m\'as comunes. Esto suele ser lo recomendado y generalmente suficiente para probar adecuadamente un sistema. 
+
+%pruebas de integración de lectura, escritura, actualización y eliminación 
+
+Tras este proceso de experimentaci\'on pudo comprobarse que la implementaci\'on propuesta cuenta con un c\'odigo robusto, libre de errores, capaz de satisfacer las funcionalidades b\'asicas para las que fue concebido.
+
+N\'otese que fueron seguidas las normativas de Fabric para el desarrollo de extensiones y contribuciones a su plataforma. Cada clase y m\'etodo del SDK, as\'i los ejemplos de prueba, fueron bien documentados. Adem\'as, fue dise\~nado cuidadosamente teniendo en cuenta la facilidad de uso para los desarrolladores a los que va destinada la plataforma.
+
+El uso de interfaces y el encapsulamiento en clases que C\# facilita, permiti\'o estructurar el proyecto en forma que futuros trabajos para extenderlo puedan ser acoplados sin dificultad. Esto garantiza la escalabilidad horizontal, de gran importancia en este tipo de trabajos que se proyectan a largo plazo. 
+%la posibilidad de trabajr con acciones asincronas, las interfaces para hacerlo mas extensible

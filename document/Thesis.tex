@@ -29,35 +29,67 @@
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-
+\definecolor{redstrings}{rgb}{0.9,0,0}
 \lstdefinestyle{mystyle}{
-    backgroundcolor=\color{backcolour},   
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{purple},
-    numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\footnotesize,
-    breakatwhitespace=false,         
-    breaklines=true,                 
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbers=left,                    
-    numbersep=5pt,                  
-    showspaces=false,                
-    showstringspaces=false,
-    showtabs=false,                  
-    tabsize=4
+	language=[Sharp]C,
+	backgroundcolor=\color{white},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{blue},
+	morekeywords={partial, var, value, get, set, T},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{redstrings},
+	%    basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=true,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=4,
+	%    
+	frame=lines,
+	escapeinside={(*@}{@*)},
+	%commentstyle=\color{greencomments},
+	basicstyle=\ttfamily,
 }
 
 \lstset{style=mystyle}
 
-\title{Módulo fabric-ca-client \\ del fabric-sdk-csharp \\ para generar identidades criptográficas \\ con CSharp.}
+%\lstdefinestyle{mystyle}{
+%    backgroundcolor=\color{backcolour},   
+%    commentstyle=\color{codegreen},
+%    keywordstyle=\color{purple},
+%    numberstyle=\tiny\color{codegray},
+%    stringstyle=\color{codepurple},
+%    basicstyle=\ttfamily\footnotesize,
+%    breakatwhitespace=false,         
+%   breaklines=true,                 
+%   captionpos=b,                    
+%    keepspaces=true,                 
+%   numbers=left,                    
+%    numbersep=5pt,                  
+%    showspaces=false,                
+%   showstringspaces=false,
+%    showtabs=false,                  
+%   tabsize=4
+%}
+
+%\lstset{style=mystyle}
+
+\title{Módulo fabric-ca-client \\ del SDK de Fabric \\ para gestionar identidades criptográficas \\ con C\#.}
 \author{\\\vspace{0.25cm}Gabriela B. Mart\'inez Giraldo}
-\advisor{\\\vspace{0.25cm}Camilo Denis González Garrido\\\vspace{0.2cm}Daniel Mena Frias}
+%\advisor{\\\vspace{0.25cm}Ing. Daniel Mena \\\vspace{0.25cm}Ing. Camilo  Denis González\\\vspace{0.2cm}Dr. Miguel Katrib Mora}
+
+\advisor{\\\vspace{0.25cm}Camilo Denis González
+	\\\vspace{0.25cm}Daniel Mena Frias
+\\\vspace{0.25cm}Miguel Katrib Mora}
 \degree{Licenciado en Ciencia de la Computación}
 \faculty{Facultad de Matemática y Computación}
 
-\date{20 de enero de 2023\\\vspace{0.25cm}\href{https://github.com/ic-matcom/fabric-sdk-csharp}{github.com/ic-matcom/fabric-sdk-csharp}}
+\date{Enero del 2023\\\vspace{0.25cm}\href{https://github.com/ic-matcom/fabric-sdk-csharp}{github.com/ic-matcom/fabric-sdk-csharp}}
 
 \logo{Graphics/uhlogo}
 
@@ -111,5 +143,6 @@
 \include{BackMatter/Conclusions}
 \include{BackMatter/Recomendations}
 \include{BackMatter/Bibliography}
+\include{BackMatter/Glossary}
 
 \end{document}
